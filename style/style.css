@@ -1,6 +1,66 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 div{
     display: flex;
     align-items: center;
     justify-content: center;
 
+}
+
+
+
+#formulaire{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    width: 50%;
+    border : 1px solid black
+}
+
+fieldset{
+    border-radius: 5px;
+}
+
+#guess{
+    width: 80%;
+    border-color: beige;
+    border-radius: 2px;
+    height: 60%;
+    font-size: 15px;
+}
+
+
+#liste_carte{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+#liste_carte table,td{
+    border: 1px solid black;
+    border-collapse: collapse;
+    width : 100%;
+
+}
+#carte{
+    height : 60px;
+    width : 100%;
+    margin-left: 10px;
+}
+#photo_carte{
+    height: 50px;
+    width: 45px;
+
+}
+#carte p{
+    width: 80%;
+    margin-left: 25px ;
+    margin-right: 25px;
+    font-family: "Candara Light";
 }
