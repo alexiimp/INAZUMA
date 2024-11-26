@@ -39,7 +39,7 @@ fieldset{
 #liste_carte{
     width: 50%;
     height: 200px;
-    display: flex;
+    display: inline-block;/*pour tableau déroulant*/
     flex-direction: column;
     overflow: scroll;
 
