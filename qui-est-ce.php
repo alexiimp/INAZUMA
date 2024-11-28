@@ -8,7 +8,7 @@ function liste(){
 
     while ($perso=fgetcsv($csv)) {
 
-        echo "<tr><td id='".$perso[0]."' style='display: none;'><div id='carte'><img src='images/personnages/".$perso[0]."' alt='photo' id='photo_carte'>";
+        echo "<tr><td id='".$perso[1]."' style='display: none;'><div id='carte'><img src='images/personnages/".$perso[0]."' alt='photo' id='photo_carte'>";
         echo "<p>".$perso[1]."</p></div></td></tr>";
     }
     fclose($csv);

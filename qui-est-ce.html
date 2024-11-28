@@ -1,0 +1,92 @@
+<head>
+    <meta charset='utf-8'>
+    <title>QUIESTCE</title>
+    <link rel='stylesheet' type='text/css' href='style/style.css'>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+</head>
+<body>
+    <script>
+
+        async function getCsv(){
+            res= await fetch('joueurs.csv');
+            let text=  await res.text();
+            let doc = []
+            let lignes = text.split("\r\n");
+            let headers = lignes[0].split(",");
+            for (var i = 1 ; i<lignes.length ; i++) {
+                var obj = {};
+                var current = lignes[i].split(",");
+                for (var j = 0; j < current.length; j++) {
+                    obj[headers[j]] = current[j];
+                }
+                doc.push(obj);
+            }
+            console.log(doc[1]["Nom"]);
+            return doc
+        }
+        const csv = getCsv();
+        /*fetch ("joueurs.csv").then((res) =>res.text()).then((text) => {
+            let doc = []
+            let lignes = text.split("\r\n");
+            let headers = lignes[0].split(",");
+            for (var i = 1 ; i<lignes.length ; i++) {
+                var obj = {};
+                var current = lignes[i].split(",");
+                for (var j = 0; j < current.length; j++) {
+                    obj[headers[j]] = current[j];
+                }
+                doc.push(obj);
+            }
+            console.log(doc[1]["Nom"]);
+            return doc
+        }).then((n)=>{
+            store(n);
+            console.log(csv[0])
+        })*/
+
+        function creerTableau(csv){
+            let body = document.getElementsByTagName('body')[0];
+            let div = document.createElement('div');
+            div.setAttribute('id','liste_carte');
+            let table = document.createElement('table');
+            csv.then((s)=>{
+                for (let joueur in s){
+                    joueur = s[joueur]
+                    let tr = document.createElement('tr');
+                    let td = document.createElement('td');
+                    td.setAttribute('id',joueur["Nom"]);
+                    //td.style.display = 'none';
+                    let carte = document.createElement('div');
+                    carte.setAttribute('id','carte');
+                    let img = document.createElement('img');
+                    img.setAttribute('src','images/personnages/'+joueur["Photo"]);
+                    img.setAttribute('alt','photoperso');
+                    img.setAttribute('id','photo_carte');
+                    carte.appendChild(img);
+                    let p = document.createElement('p');
+                    let texte = document.createTextNode(joueur['Nom']);
+                    p.appendChild(texte);
+                    carte.appendChild(p);
+                    td.appendChild(carte);
+                    tr.appendChild(td);
+                    table.appendChild(tr);
+                }
+                div.appendChild(table);
+                body.appendChild(div);
+            })
+
+
+        }
+    </script>
+    <div>
+        <h1>Devinez le personnage d'inazuma d'aujourd'hui</h1>
+    </div>
+    <form method='post' action='' id='formulaire'>
+        <input type='text' name='guess' id='guess' placeholder='Nom de personnage, alias' onkeyup=''>
+        <input type='submit' value='Envoyer'>
+    </form>
+    <script>
+        creerTableau(csv)
+    </script>
+</body>
