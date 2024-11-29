@@ -45,6 +45,16 @@
             }
             return false;
         }
+        function VerifSurnoms(surnoms,char){
+            let listeSurnoms = surnoms.split('-');
+            for (let surnom in listeSurnoms){
+
+                if (VerifNom(listeSurnoms[surnom],char)){
+                    return true;
+                }
+            }
+            return false;
+        }
 
         function afficherPersos(csv){
             var ancien = document.getElementById('liste_carte');
@@ -64,7 +74,7 @@
                 let vide = true;
                 for (let joueur in s){
                     joueur = s[joueur]
-                    if (VerifNom(joueur['Nom'],nom)){
+                    if (VerifNom(joueur['Nom'],nom) || VerifSurnoms(joueur['Surnoms'],nom)){
                         vide = false;
                         let tr = document.createElement('tr');
                         let td = document.createElement('td');
