@@ -27,6 +27,25 @@
         }
         const csv = getCsv();
 
+        function VerifNom(nom,char){
+            let noms = nom.split(' ');
+            let chars = char.split(' ');
+            if (chars.length>noms.length){
+                return false
+            }
+            for (var x = 0;x < noms.length-(chars.length-1);x++){
+                for (var y= 0 ; y < chars.length;y++){
+                    if (!noms[x+y].toLowerCase().startsWith(chars[y].toLowerCase())){
+                         break
+                    }
+                    if (y===chars.length-1){
+                         return true
+                     }
+                }
+            }
+            return false;
+        }
+
         function afficherPersos(csv){
             var ancien = document.getElementById('liste_carte');
             const nom = document.getElementById('guess').value;
@@ -45,7 +64,7 @@
                 let vide = true;
                 for (let joueur in s){
                     joueur = s[joueur]
-                    if (joueur['Nom'].toLowerCase().includes(nom.toLowerCase())){
+                    if (VerifNom(joueur['Nom'],nom)){
                         vide = false;
                         let tr = document.createElement('tr');
                         let td = document.createElement('td');
@@ -90,7 +109,4 @@
         <input type='text' name='guess' id='guess' placeholder='Nom de personnage, alias' onkeyup='afficherPersos(csv)'>
         <input type='submit' value='Envoyer'>
     </form>
-    <script>
-        creerTableau(csv)
-    </script>
 </body>
