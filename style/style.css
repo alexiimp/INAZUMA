@@ -40,10 +40,11 @@ fieldset{
 #liste_carte{
     width: 50%;
     min-height: 70px;
-    max-height: 210px;
-    display: inline-block;/*pour tableau déroulant*/
+    max-height: 190px;
+    display: inline-block;
     flex-direction: column;
-    overflow: scroll;
+    overflow: auto;
+    overflow-x: hidden;
 }
 
 #liste_carte table,td{
