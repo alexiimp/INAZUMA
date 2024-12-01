@@ -4,6 +4,8 @@
     <link rel='stylesheet' type='text/css' href='style/style.css'>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
+
+
 </head>
 <body>
     <script>
@@ -50,10 +52,10 @@
             for (let surnom in listeSurnoms){
 
                 if (VerifNom(listeSurnoms[surnom],char)){
-                    return true;
+                    return [true,listeSurnoms[surnom]];
                 }
             }
-            return false;
+            return [false];
         }
 
         function afficherPersos(csv){
@@ -74,7 +76,8 @@
                 let vide = true;
                 for (let joueur in s){
                     joueur = s[joueur]
-                    if (VerifNom(joueur['Nom'],nom) || VerifSurnoms(joueur['Surnoms'],nom)){
+                    verifsurnom = VerifSurnoms(joueur['Surnoms'],nom)
+                    if (VerifNom(joueur['Nom'],nom) || verifsurnom[0]){
                         vide = false;
                         let tr = document.createElement('tr');
                         let td = document.createElement('td');
@@ -89,7 +92,22 @@
                         let p = document.createElement('p');
                         let texte = document.createTextNode(joueur['Nom']);
                         p.appendChild(texte);
-                        carte.appendChild(p);
+                        if (verifsurnom[0]){
+                            let surnom = document.createElement('p');
+                            surnom.style.fontSize = "12px"
+                            let texte2 = document.createTextNode('Alias : '+verifsurnom[1]);
+                            surnom.appendChild(texte2);
+                            let div = document.createElement('div');
+                            surnom.setAttribute('id','surnom');
+                            div.setAttribute('id','nomcontain');
+                            div.appendChild(p);
+                            div.appendChild(surnom);
+                            carte.appendChild(div);
+
+                        }
+                        else{
+                            carte.appendChild(p);
+                        }
                         td.appendChild(carte);
                         tr.appendChild(td);
                         table.appendChild(tr);

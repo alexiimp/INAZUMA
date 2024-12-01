@@ -69,3 +69,19 @@ fieldset{
     margin-right: 25px;
     font-family: "Candara Light";
 }
+
+#nomcontain{
+    width : 80%;
+    margin-left: 25px ;
+    margin-right: 25px;
+    display: flex;
+    flex-direction: column;
+}
+#nomcontain p{
+    margin: 0;
+    width: 100%;
+}
+#surnom{
+    font-size: 12px;
+    margin : 0;
+}
