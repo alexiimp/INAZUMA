@@ -22,13 +22,10 @@ function essai(){
     echo 'oui';
 }
 
-echo "<!DOCTYPE html>
-<html lang='fr'>
-<head>
-    <meta charset='UTF-8'>
-    <title>QUIESTCE</title>
-    <link rel='stylesheet' type='text/css' href='style/style.css'>
-    <script src='fonction.js'></script>
+echo "<head>
+        <meta charset='utf-8'>
+        <title>QUIESTCE</title>
+        <link rel='stylesheet' type='text/css' href='style/style.css'>
 </head>
 <body>";
 echo "<div> 
@@ -44,7 +41,7 @@ echo "<form method='post' action='' id='formulaire'>
 
 
 
-echo "<p id='test'></p>";
+
 
 
 echo "</body>";
