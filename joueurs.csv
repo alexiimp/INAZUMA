@@ -1,10 +1,10 @@
 Photo,Nom,Surnoms,Genre,Equipe,Poste,Element,Origine,Classe,Apparition
 Mark-Evans.jpg,Mark Evans,,Masculin,Raimon-Inazuma Japon,Gardien,Terre,Tokyo,5e,Saison 1
-Jude-Sharp.jpg,Jude Sharp,,Masculin,Raimon-Royal Academy-Inazuma Japon,Milieu,Air,Tokyo,5e,Saison 1
-Axel-Blaze.jpg,Axel Blaze,,Masculin,Raimon-Kirkwood-Inazuma Japon,Attaquant,Feu,Tokyo,5e,Saison 1
+Jude-Sharp.jpg,Jude Sharp,Le stratege,Masculin,Raimon-Royal Academy-Inazuma Japon,Milieu,Air,Tokyo,5e,Saison 1
+Axel-Blaze.jpg,Axel Blaze,L'attaquant de Feu,Masculin,Raimon-Kirkwood-Inazuma Japon,Attaquant,Feu,Tokyo,5e,Saison 1
 Nathan-Swift.jpg,Nathan Swift,,Masculin,Raimon-Empereurs Noirs-Inazuma Japon,Defenseur,Air,Tokyo,5e,Saison 1
 Kevin-Dragonfly.jpg,Kevin Dragonfly,,Masculin,Raimon-Empereurs Noirs-Inazuma Japon,Attaquant,Bois,Tokyo,5e,Saison 1
-Caleb-Stonewall.jpg,Caleb Stonewall,,Masculin,Nouvelle Royal Academy-Inazuma Japon,Milieu,Feu,Tokyo,5e,Saison 2
+Caleb-Stonewall.jpg,Caleb Stonewall,Le Joker,Masculin,Nouvelle Royal Academy-Inazuma Japon,Milieu,Feu,Tokyo,5e,Saison 2
 Silvia-Woods.jpg,Silvia Woods,,Feminin,Raimon-Inazuma Japon,Autre,Bois,Tokyo,5e,Saison 1
 Nelly-Raimon.jpg,Nelly Raimon,,Feminin,Raimon-Little Gigantes-Inazuma Japon,Autre,Feu,Tokyo,5e,Saison 1
 Byron-Love.jpg,Byron Love,Aphrodite,Masculin,Zeus-Dragons de Feu,Milieu,Bois,Corée-Tokyo,5e,Saison 1
@@ -14,7 +14,7 @@ Dave-Quagmire.jpg,Dave Quagmire,Dvalin,Masculin,Epsilon-Neo Japon,Gardien-Milieu
 Percival-Travis.jpg,Percival Travis,,Masculin,Inazuma Japon-Cherrybloom,Autre,Bois,Tokyo,Adulte,Saison 3
 Lina-Schiller.jpg,Lina Schiller,,Feminin,Raimon-Neo Japon,Autre,Bois,Fuji,Adulte,Saison 2
 David-Evans.jpg,David Evans,,Masculin,Little Gigantes-Raimon,Autre,Terre,Tokyo,Adulte,Saison 3
-Paolo-Bianchi.jpg,Paolo Bianchi,,Masculin,Orphée,Attaquant,Bois,Italie,5e,Saison 3
+Paolo-Bianchi.jpg,Paolo Bianchi,Le Météore Blanc italien,Masculin,Orphée,Attaquant,Bois,Italie,5e,Saison 3
 Shadow-Cimmerian.jpg,Shadow Cimmerian,,Masculin,Empereurs Noirs-Raimon,Attaquant,Bois,Tokyo,5e,Saison 2
 Hurley-Kane.jpg,Hurley Kane,,Masculin,Mary Times-Inazuma Japon,Defenseur,Air,Okinawa,4e,Saison 2
 Claude-Beacons.jpg,Claude Beacons,Torch,Masculin,Prominence-Chaos-Dragons de Feu,Attaquant,Feu,Corée-Fuji,Inconnue,Saison 2
@@ -23,7 +23,7 @@ Thomas-Feldt.jpg,Thomas Feldt,,Masculin,Cybertech-Empereurs Noirs,Gardien,Bois,T
 Malcolm-Night.jpg,Malcolm Night,,Masculin,Kirkwood-Empereurs Noirs,Defenseur,Feu,Tokyo-Etats Unis,Inconnue,Saison 1
 Thiago-Torres.jpg,Thiago Torres,,Masculin,Les Empereurs,Defenseur,Feu,Argentine,4e,Saison 3
 Edgar-Partinus.jpg,Edgar Partinus,,Masculin,Knights of Queen,Attaquant,Bois,Angleterre,4e,Saison 3
-Erik-Eagle.jpg,Erik Eagle,,Masculin,Raimon-Licornes,Milieu,Bois,Etats Unis-Tokyo,5e,Saison 1
+Erik-Eagle.jpg,Erik Eagle,Le magicien du ballon rond,Masculin,Raimon-Licornes,Milieu,Bois,Etats Unis-Tokyo,5e,Saison 1
 Victoria-Vanguard.jpg,Victoria Vanguard,Tori,Feminin,Services Secrets-Raimon,Milieu,Air,Tokyo,5e,Saison 2
 Jack-Wallside.jpg,Jack Wallside,,Masculin,Raimon-Inazuma Japon,Defenseur,Terre,Tokyo,6e,Saison 1
 Tod-Ironside.jpg,Tod Ironside,,Masculin,Raimon-Empereurs Noirs-Inazuma Japon,Defenseur,Feu,Tokyo,6e,Saison 1
@@ -33,7 +33,7 @@ Jordan-Greenway.jpg,Jordan Greenway,Janus,Masculin,Tempete des Gemeaux-Inazuma J
 Seymour-Hillman.jpg,Seymour Hillman,,Masculin,Raimon-Inazuma Japon,Autre,Terre,Tokyo,Adulte,Saison 1
 Bobby-Shearer.jpg,Bobby Shearer,,Masculin,Royal Academy-Raimon-Licornes,Defenseur,Bois,Etats Unis-Tokyo,5e,Saison 2
 Mark-Krueger.jpg,Mark Krueger,,Masculin,Licornes,Milieu,Bois,Etats Unis,5e,Saison 3
-Shawn-Frost.jpg,Shawn Frost,,Masculin,Alpin-Raimon-Inazuma Japon,Defenseur-Attaquant,Air,Hokkaido,5e,Saison 2
+Shawn-Frost.jpg,Shawn Frost,Le Prince des Neiges-Le tueur d'ours,Masculin,Alpin-Raimon-Inazuma Japon,Defenseur-Attaquant,Air,Hokkaido,5e,Saison 2
 Thor-Stoutberg.jpg,Thor Stoutberg,,Masculin,Inazuma Japon,Defenseur-Milieu,Air,Okinawa,Inconnue,Saison 2
 Scott-Banyan.jpg,Scott Banyan,Scotty,Masculin,Cloitre Sacré-Raimon-Inazuma Japon,Defenseur,Bois,Kyoto,6e,Saison 2
 Celia-Hills.jpg,Celia Hills,,Feminin,Raimon-Inazuma Japon,Autre,Air,Tokyo,6e,Saison 1
@@ -58,7 +58,7 @@ Sam-Kincaid.jpg,Sam Kincaid,,Masculin,Raimon-Empereurs Noirs,Milieu,Feu,Tokyo,6e
 Darren-LaChance.jpg,Darren LaChance,,Masculin,Fauxshore-Raimon-Inazuma Japon,Gardien,Bois,Fukuoka,6e,Saison 2
 Zephyr-Vitesse.jpg,Zephyr Vitesse,,Masculin,Little Gigantes,Defenseur,Air,Costail,Inconnue,Saison 3
 Maximino-Cruz.jpg,Maximino Cruz,,Masculin,Rois du Football,Milieu,Air,Bresil,Inconnue,Saison 3
-Mac-Robingo.jpg,Mac Robingo,,Masculin,Rois du Football,Attaquant,Feu,Bresil,Inconnue,Saison 3
+Mac-Robingo.jpg,Mac Robingo,Le Roi des Attaquants,Masculin,Rois du Football,Attaquant,Feu,Bresil,Inconnue,Saison 3
 Carlos-Lagarto.jpg,Carlos Lagarto,,Masculin,Rois du Football,Defenseur,Bois,Bresil,Inconnue,Saison 3
 Gato-Carvalho.jpg,Gato Carvalho,,Masculin,Rois du Football,Attaquant,Feu,Bresil,Inconnue,Saison 3
 Falcao-DaSilva.jpg,Falcao DaSilva,,Masculin,Rois du Football,Gardien,Terre,Bresil,Inconnue,Saison 3
