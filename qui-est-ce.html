@@ -24,7 +24,6 @@
                 }
                 doc.push(obj);
             }
-            console.log(doc[1]["Nom"]);
             return doc
         }
         const csv = getCsv();
@@ -58,7 +57,24 @@
             return [false];
         }
 
-        function afficherPersos(csv){
+        function comparaison(nom1){
+            csv.then((s)=>{
+
+                let j1;
+                let j2;
+                for (let joueur1 in s){
+                    joueur1=s[joueur1]
+                    if (joueur1['Nom']===nom1){
+                        j1=joueur1;
+                    }
+                    if (joueur1['Nom']==="Jude Sharp"){
+                        j2=joueur1;
+                    }
+                }
+                console.log(j1['Nom']+" vs "+j2['Nom'])
+            })
+        }
+        function afficherPersos(){
             var ancien = document.getElementById('liste_carte');
             const nom = document.getElementById('guess').value;
             if (ancien){
@@ -84,6 +100,9 @@
                         td.setAttribute('id',joueur["Nom"]);
                         let carte = document.createElement('div');
                         carte.setAttribute('id','carte');
+                        carte.setAttribute('name',joueur['Nom']);
+                        carte.setAttribute('onclick','comparaison("'+joueur["Nom"]+'")');
+
                         let img = document.createElement('img');
                         img.setAttribute('src','images/personnages/'+joueur["Photo"]);
                         img.setAttribute('alt','photoperso');
@@ -134,7 +153,7 @@
         <h1>Devinez le personnage d'inazuma d'aujourd'hui</h1>
     </div>
     <form method='post' action='' id='formulaire'>
-        <input type='text' name='guess' id='guess' placeholder='Nom de personnage, alias' onkeyup='afficherPersos(csv)'>
+        <input type='text' name='guess' id='guess' placeholder='Nom de personnage, alias' onkeyup='afficherPersos()'>
         <input type='submit' value='Envoyer'>
     </form>
 </body>
