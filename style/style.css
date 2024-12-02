@@ -12,7 +12,11 @@ div{
 
 }
 
-
+#racine{
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+}
 
 #formulaire{
     display: flex;
@@ -85,4 +89,10 @@ fieldset{
 #surnom{
     font-size: 12px;
     margin : 0;
+}
+
+
+#comp{
+    width : 75%;
+    table-layout: fixed;
 }
