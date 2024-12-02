@@ -132,7 +132,20 @@
                                 if (val1!=='Film'){
                                     let j1Saison = val1.split(' ')[1];
                                     let j2Saison = val2.split(' ')[1];
-                                    if (parseInt(j1Saison)>=parseInt(j2Saison)){
+                                    if (parseInt(j1Saison)>parseInt(j2Saison)){
+                                        td.appendChild(document.createTextNode(' bas'))
+                                    }
+                                    else{
+                                        td.appendChild(document.createTextNode(' haut'))
+                                    }
+                                }
+                            }
+                            else{
+                                let listeClasse = ["CM2","6e","5e","4e","3e","Adulte"];
+                                if (val1!=='Inconnue' && val2!=='Inconnue'){
+                                    let index1 = listeClasse.indexOf(val1);
+                                    let index2 = listeClasse.indexOf(val2);
+                                    if (index1>index2){
                                         td.appendChild(document.createTextNode(' bas'))
                                     }
                                     else{
