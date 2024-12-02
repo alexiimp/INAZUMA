@@ -101,7 +101,7 @@
                             td.style.backgroundColor = 'red';
                         }
                     }
-                    else if (["Equipe","Poste","Origine"].includes(cle)){
+                    else if (["Poste","Origine","Equipe"].includes(cle)){
                         let nb= 0;
                         let eq1= val1.split('-');
                         let eq2 = val2.split('-');
@@ -115,7 +115,7 @@
                             td.style.backgroundColor = 'red';
                         }
 
-                        else if (nb===eq2.length){
+                        else if (nb===eq2.length && nb===eq1.length){
                             td.style.backgroundColor = 'green';
                         }
                         else{
