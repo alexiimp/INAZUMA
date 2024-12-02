@@ -72,10 +72,9 @@
                     }
                 }
                 let table = document.getElementById('comp');
-                let row = document.createElement('tr');
+                let row = table.insertRow(1);
                 for (let cle in j1){
                     compare(cle,j1[cle],j2[cle],row);
-                    table.appendChild(row);
                 }
                 console.log(j1['Nom']+" vs "+j2['Nom'])
             })

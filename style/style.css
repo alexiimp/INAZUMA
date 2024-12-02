@@ -107,6 +107,9 @@ fieldset{
     border-collapse: collapse;
     width : 100%;
     height : 100%;
+    text-align: center  ;
+    font-family: "Candara Light";
+
 }
 
 /* width */
