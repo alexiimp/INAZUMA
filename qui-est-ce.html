@@ -15,7 +15,7 @@
             let text=  await res.text();
             let doc = []
             let lignes = text.split("\r\n");
-            let headers = lignes[0].split(",");
+            const headers = lignes[0].split(",");
             for (var i = 1 ; i<lignes.length ; i++) {
                 var obj = {};
                 var current = lignes[i].split(",");
@@ -101,7 +101,7 @@
                             td.style.backgroundColor = 'red';
                         }
                     }
-                    if (["Equipe","Poste","Origine"].includes(cle)){
+                    else if (["Equipe","Poste","Origine"].includes(cle)){
                         let nb= 0;
                         let eq1= val1.split('-');
                         let eq2 = val2.split('-');
@@ -122,6 +122,26 @@
                             td.style.backgroundColor = 'orange';
                         }
                     }
+                    else if(["Classe","Apparition"].includes(cle)){
+                        if (val1===val2){
+                            td.style.backgroundColor = 'green';
+                        }
+                        else{
+                            td.style.backgroundColor = 'red';
+                            if (cle==='Apparition'){
+                                if (val1!=='Film'){
+                                    let j1Saison = val1.split(' ')[1];
+                                    let j2Saison = val2.split(' ')[1];
+                                    if (parseInt(j1Saison)>=parseInt(j2Saison)){
+                                        td.appendChild(document.createTextNode(' bas'))
+                                    }
+                                    else{
+                                        td.appendChild(document.createTextNode(' haut'))
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
                 row.appendChild(td);
             }
@@ -130,7 +150,7 @@
         }
         function afficherPersos(){
             var ancien = document.getElementById('liste_carte');
-            const nom = document.getElementById('guess').value;
+            let nom = document.getElementById('guess').value;
             if (ancien){
                 ancien.remove();
             }
