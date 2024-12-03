@@ -170,9 +170,16 @@
 
 
         }
+        var precedent;
         function afficherPersos(){
             var ancien = document.getElementById('liste_carte');
             let nom = document.getElementById('guess').value;
+            if (nom===precedent){
+                return
+            }
+            else{
+                precedent=nom
+            }
             if (ancien){
                 ancien.remove();
             }
