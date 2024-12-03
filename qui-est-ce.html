@@ -203,7 +203,7 @@
                         let tr = document.createElement('tr');
                         let td = document.createElement('td');
                         td.setAttribute('class','row');
-                        td.setAttribute('id',joueur["Nom"].replace(' ',''));
+                        td.setAttribute('id',joueur["Nom"]);
                         if(vide){
                             td.classList.add('selected')
                         }
@@ -274,6 +274,12 @@
         function reaction(e){
             if (e.code==="ArrowDown" || e.code==="ArrowUp"){
                 e.preventDefault();
+            }
+            if (e.code==="Enter"){
+                let selected  = document.getElementsByClassName('selected')[0]
+                if (selected){
+                    afficheComparaison(selected.id)
+                }
             }
         }
 
