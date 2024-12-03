@@ -59,8 +59,10 @@
         }
 
         function afficheComparaison(nom1){
+            let text = document.getElementById('guess')
+            text.value = ""
+            afficherPersos()
             csv.then((s)=>{
-
                 let j1;
                 let j2;
                 for (let joueur1 in s){
@@ -314,7 +316,6 @@
                     let newSelected = table.rows[index % table.rows.length].children[0]
                     td.classList.remove('selected')
                     newSelected.classList.add('selected')
-                    console.log(td.id+" "+td.classList+" " +newSelected.id+newSelected.classList)
                 }
 
             }
