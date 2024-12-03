@@ -256,10 +256,21 @@
     </div>
     <div id="racine">
         <form method='post' action='' id='formulaire'>
-            <input type='text' name='guess' id='guess' placeholder='Nom de personnage, alias' onkeyup='afficherPersos()'>
+            <input type='text' name='guess' id='guess' placeholder='Nom de personnage, alias'
+                   onkeyup='afficherPersos()'>
             <input type='submit' value='Envoyer'>
         </form>
     </div>
+    <script>
+        let text = document.getElementById('guess')
+        text.addEventListener('keydown',reaction)
+        function reaction(e){
+            if (e.code==="ArrowDown" || e.code==="ArrowUp"){
+                e.preventDefault();
+            }
+        }
+
+    </script>
     <table id="comp">
         <tr>
             <th>Perso</th>
