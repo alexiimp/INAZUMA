@@ -59,36 +59,43 @@ fieldset{
     width : 100%;
     height : 100%;
 }
+#liste_carte td:hover{
+    background-color: whitesmoke;
+}
+.selected{
+    background-color: #dcdcdc;
+}
 
-#carte{
+.carte{
     height : 60px;
     width : auto;
     margin-left: 10px;
 }
-#photo_carte{
+
+.photo_carte{
     height: 50px;
     width: 45px;
 
 }
-#carte p{
+.carte p{
     width: 80%;
     margin-left: 25px ;
     margin-right: 25px;
     font-family: "Candara Light";
 }
 
-#nomcontain{
+.nomcontain{
     width : 80%;
     margin-left: 25px ;
     margin-right: 25px;
     display: flex;
     flex-direction: column;
 }
-#nomcontain p{
+.nomcontain p{
     margin: 0;
     width: 100%;
 }
-#surnom{
+.surnom{
     font-size: 12px;
     margin : 0;
 }
@@ -109,11 +116,11 @@ fieldset{
     text-align: center;
     font-family: "Candara Light";
 }
-#photo_comp{
+.photo_comp{
     width: 100%;
     aspect-ratio: 1/1;
 }
-#sup{
+.sup{
     height: 100%;
     width: 100%;
     bottom: 1px;
@@ -124,7 +131,7 @@ fieldset{
     background: rgba(0, 0, 0, .4);
 }
 
-#inf{
+.inf{
     height: 100%;
     width: 100%;
     bottom: 1px;

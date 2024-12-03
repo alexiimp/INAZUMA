@@ -88,7 +88,7 @@
                 if (cle==="Photo"){
                     let img = document.createElement('img');
                     img.setAttribute('src','images/personnages/'+val1)
-                    img.setAttribute('id','photo_comp');
+                    img.setAttribute('class','photo_comp');
                     img.setAttribute('alt','photo');
                     td.appendChild(img);
                 }
@@ -135,12 +135,12 @@
                                     let j2Saison = val2.split(' ')[1];
                                     if (parseInt(j1Saison)>parseInt(j2Saison)){
                                         let fleche = document.createElement('div');
-                                        fleche.setAttribute('id','inf');
+                                        fleche.setAttribute('class','inf');
                                         td.appendChild(fleche)
                                     }
                                     else{
                                         let fleche = document.createElement('div');
-                                        fleche.setAttribute('id','sup');
+                                        fleche.setAttribute('class','sup');
                                         td.appendChild(fleche)
                                     }
                                 }
@@ -152,12 +152,12 @@
                                     let index2 = listeClasse.indexOf(val2);
                                     if (index1>index2){
                                         let fleche = document.createElement('div');
-                                        fleche.setAttribute('id','inf');
+                                        fleche.setAttribute('class','inf');
                                         td.appendChild(fleche)
                                     }
                                     else{
                                         let fleche = document.createElement('div');
-                                        fleche.setAttribute('id','sup');
+                                        fleche.setAttribute('class','sup');
                                         td.appendChild(fleche)
                                     }
                                 }
@@ -193,16 +193,15 @@
                         vide = false;
                         let tr = document.createElement('tr');
                         let td = document.createElement('td');
-                        td.setAttribute('id',joueur["Nom"]);
+                        td.setAttribute('id',joueur["Nom"].replace(' ',''));
                         let carte = document.createElement('div');
-                        carte.setAttribute('id','carte');
+                        carte.setAttribute('class','carte');
                         carte.setAttribute('name',joueur['Nom']);
                         carte.setAttribute('onclick','afficheComparaison("'+joueur["Nom"]+'")');
-
                         let img = document.createElement('img');
                         img.setAttribute('src','images/personnages/'+joueur["Photo"]);
                         img.setAttribute('alt','photoperso');
-                        img.setAttribute('id','photo_carte');
+                        img.setAttribute('class','photo_carte');
                         carte.appendChild(img);
                         let p = document.createElement('p');
                         let texte = document.createTextNode(joueur['Nom']);
@@ -213,8 +212,8 @@
                             let texte2 = document.createTextNode('Alias : '+verifsurnom[1]);
                             surnom.appendChild(texte2);
                             let div = document.createElement('div');
-                            surnom.setAttribute('id','surnom');
-                            div.setAttribute('id','nomcontain');
+                            surnom.setAttribute('class','surnom');
+                            div.setAttribute('class','nomcontain');
                             div.appendChild(p);
                             div.appendChild(surnom);
                             carte.appendChild(div);
