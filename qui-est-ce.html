@@ -27,7 +27,8 @@
             return doc
         }
         const csv = getCsv();
-
+        const joueurDuJour = "Jude Sharp";
+        const dejaVu =[];
         function VerifNom(nom,char){
             let noms = nom.split(' ');
             let chars = char.split(' ');
@@ -67,10 +68,11 @@
                     if (joueur1['Nom']===nom1){
                         j1=joueur1;
                     }
-                    if (joueur1['Nom']==="Jude Sharp"){
+                    if (joueur1['Nom']===joueurDuJour){
                         j2=joueur1;
                     }
                 }
+                dejaVu.push(j1['Nom']);
                 let table = document.getElementById('comp');
                 let row = table.insertRow(1);
                 for (let cle in j1){
@@ -187,7 +189,7 @@
                 for (let joueur in s){
                     joueur = s[joueur]
                     verifsurnom = VerifSurnoms(joueur['Surnoms'],nom)
-                    if (VerifNom(joueur['Nom'],nom) || verifsurnom[0]){
+                    if ((VerifNom(joueur['Nom'],nom) || verifsurnom[0]) && !dejaVu.includes(joueur["Nom"])){
                         vide = false;
                         let tr = document.createElement('tr');
                         let td = document.createElement('td');
