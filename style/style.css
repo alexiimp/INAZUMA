@@ -110,7 +110,10 @@ fieldset{
     height : 100px;
     text-align: center  ;
     font-family: "Candara Light";
-
+}
+#photo_comp{
+    height: 100%;
+    width: 100%;
 }
 #sup{
     height: 100%;
