@@ -132,10 +132,14 @@
                                     let j1Saison = val1.split(' ')[1];
                                     let j2Saison = val2.split(' ')[1];
                                     if (parseInt(j1Saison)>parseInt(j2Saison)){
-                                        td.appendChild(document.createTextNode(' bas'))
+                                        let fleche = document.createElement('div');
+                                        fleche.setAttribute('id','inf');
+                                        td.appendChild(fleche)
                                     }
                                     else{
-                                        td.appendChild(document.createTextNode(' haut'))
+                                        let fleche = document.createElement('div');
+                                        fleche.setAttribute('id','sup');
+                                        td.appendChild(fleche)
                                     }
                                 }
                             }
@@ -145,10 +149,14 @@
                                     let index1 = listeClasse.indexOf(val1);
                                     let index2 = listeClasse.indexOf(val2);
                                     if (index1>index2){
-                                        td.appendChild(document.createTextNode(' bas'))
+                                        let fleche = document.createElement('div');
+                                        fleche.setAttribute('id','inf');
+                                        td.appendChild(fleche)
                                     }
                                     else{
-                                        td.appendChild(document.createTextNode(' haut'))
+                                        let fleche = document.createElement('div');
+                                        fleche.setAttribute('id','sup');
+                                        td.appendChild(fleche)
                                     }
                                 }
                             }
