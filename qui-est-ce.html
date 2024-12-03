@@ -262,11 +262,11 @@
         <h1>Devinez le personnage d'inazuma d'aujourd'hui</h1>
     </div>
     <div id="racine">
-        <form method='post' action='' id='formulaire'>
+        <div id='formulaire'>
             <input type='text' name='guess' id='guess' placeholder='Nom de personnage, alias'
                    onkeyup='afficherPersos()'>
-            <input type='submit' value='Envoyer'>
-        </form>
+            <button type='button'>Envoyer</button>
+        </div>
     </div>
     <script>
         let text = document.getElementById('guess')
