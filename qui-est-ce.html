@@ -191,16 +191,20 @@
             let div = document.createElement('div');
             div.setAttribute('id','liste_carte');
             let table = document.createElement('table');
+            table.setAttribute('id','table_carte')
             csv.then((s)=>{
                 let vide = true;
                 for (let joueur in s){
                     joueur = s[joueur]
                     verifsurnom = VerifSurnoms(joueur['Surnoms'],nom)
                     if ((VerifNom(joueur['Nom'],nom) || verifsurnom[0]) && !dejaVu.includes(joueur["Nom"])){
-                        vide = false;
                         let tr = document.createElement('tr');
                         let td = document.createElement('td');
+                        td.setAttribute('class','row');
                         td.setAttribute('id',joueur["Nom"].replace(' ',''));
+                        if(vide){
+                            td.classList.add('selected')
+                        }
                         let carte = document.createElement('div');
                         carte.setAttribute('class','carte');
                         carte.setAttribute('name',joueur['Nom']);
@@ -232,6 +236,7 @@
                         td.appendChild(carte);
                         tr.appendChild(td);
                         table.appendChild(tr);
+                        vide = false;
                     }
                 }
                 if (vide){
@@ -282,6 +287,38 @@
             <th>Classe</th>
             <th>Apparition</th>
         </tr>
-
     </table>
+
+
+    <script>
+        let body = document.getElementsByTagName('body')[0];
+        body.addEventListener("keyup",parcourir);
+
+        function parcourir(e){
+            let table = document.getElementById('table_carte');
+            if (table && table.rows.length>=2 ){
+                let index;
+                let td = document.getElementsByClassName('selected')[0];
+                if (e.code==="ArrowDown" || e.code==="ArrowUp"){
+                    if (e.code==="ArrowDown"){
+                        index = (td.parentElement.rowIndex+1)%table.rows.length
+
+                    }
+                    else{
+                        index = td.parentElement.rowIndex-1
+                        if (index<0){
+                            index = table.rows.length+index
+                        }
+
+                    }
+                    let newSelected = table.rows[index % table.rows.length].children[0]
+                    td.classList.remove('selected')
+                    newSelected.classList.add('selected')
+                    console.log(td.id+" "+td.classList+" " +newSelected.id+newSelected.classList)
+                }
+
+            }
+
+        }
+    </script>
 </body>
