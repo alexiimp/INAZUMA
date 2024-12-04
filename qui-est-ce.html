@@ -27,7 +27,7 @@
             return doc
         }
         const csv = getCsv();
-        const joueurDuJour = "Jude Sharp";
+        var joueurDuJour;
         const dejaVu =[];
         function VerifNom(nom,char){
             let noms = nom.split(' ');
@@ -78,7 +78,6 @@
                 let text = document.getElementById('guess')
                 text.value = ""
                 afficherPersos()
-
                 dejaVu.push(j1['Nom']);
                 let table = document.getElementById('comp');
                 let row = table.insertRow(1);
@@ -200,6 +199,8 @@
             let table = document.createElement('table');
             table.setAttribute('id','table_carte')
             csv.then((s)=>{
+                if (!joueurDuJour)
+                    joueurDuJour = s[Math.floor(Math.random()*s.length)]["Nom"]
                 let vide = true;
                 for (let joueur in s){
                     joueur = s[joueur]
