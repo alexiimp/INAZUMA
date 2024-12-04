@@ -59,21 +59,26 @@
         }
 
         function afficheComparaison(nom1){
-            let text = document.getElementById('guess')
-            text.value = ""
-            afficherPersos()
             csv.then((s)=>{
                 let j1;
                 let j2;
                 for (let joueur1 in s){
                     joueur1=s[joueur1]
-                    if (joueur1['Nom']===nom1){
+                    if (joueur1['Nom'].toLowerCase()===nom1.toLowerCase()){
                         j1=joueur1;
                     }
                     if (joueur1['Nom']===joueurDuJour){
                         j2=joueur1;
                     }
                 }
+                if (!j1){/*Si le nom ne correspond a aucun perso*/
+                    return
+                }
+                /*On reboot la liste de perso et le zone de texte*/
+                let text = document.getElementById('guess')
+                text.value = ""
+                afficherPersos()
+
                 dejaVu.push(j1['Nom']);
                 let table = document.getElementById('comp');
                 let row = table.insertRow(1);
@@ -263,9 +268,10 @@
     </div>
     <div id="racine">
         <div id='formulaire'>
+            <label for="guess"></label>
             <input type='text' name='guess' id='guess' placeholder='Nom de personnage, alias'
                    onkeyup='afficherPersos()'>
-            <button type='button'>Envoyer</button>
+            <button type='button' onclick='afficheComparaison(document.getElementById("guess").value)'>Envoyer</button>
         </div>
     </div>
     <script>
