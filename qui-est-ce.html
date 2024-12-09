@@ -89,8 +89,11 @@
         }
 
         function compare(cle,val1,val2,row){
-            if (["Photo","Genre","Equipe","Poste","Element","Origine","Classe","Apparition"].includes(cle)){
+            let cles = ["Photo","Genre","Equipe","Poste","Element","Origine","Classe","Apparition"]
+            if (cles.includes(cle)){
                 let td = document.createElement('td');
+                td.style.animationDelay = (cles.indexOf(cle)*0.6)+"s"
+                console.log(cles.indexOf(cle))
                 if (cle==="Photo"){
                     let img = document.createElement('img');
                     img.setAttribute('src','images/personnages/'+val1)

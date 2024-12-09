@@ -109,12 +109,22 @@ fieldset{
 #comp th{
     border-bottom: 1px solid black;
 }
+
+
 #comp td{
     position: relative;
     border: 1px solid black;
     width : 100%;
     text-align: center;
     font-family: "Candara Light";
+    animation : tourne 1s 1;
+    animation-fill-mode: both;
+}
+
+@keyframes tourne {
+    0% {opacity: 0;transform: rotateY(180deg);}
+    50%{opacity: 100%}
+    100% { transform: rotateY(360deg);}
 }
 .photo_comp{
     width: 100%;
