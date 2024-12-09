@@ -92,7 +92,7 @@
             let cles = ["Photo","Genre","Equipe","Poste","Element","Origine","Classe","Apparition"]
             if (cles.includes(cle)){
                 let td = document.createElement('td');
-                td.style.animationDelay = (cles.indexOf(cle)*0.6)+"s"
+                td.style.animationDelay = (cles.indexOf(cle)*0.6-0.6)+"s"
                 console.log(cles.indexOf(cle))
                 if (cle==="Photo"){
                     let img = document.createElement('img');
