@@ -16,6 +16,8 @@ div{
     width: 100%;
     display:flex;
     flex-direction: column;
+    position: relative;
+    margin-bottom: 70px;
 }
 
 #formulaire{
@@ -43,14 +45,16 @@ fieldset{
 
 #liste_carte{
     width: 50%;
-    min-height: 70px;
-    max-height: 189px;
+    min-height: 60px;
+    max-height: 249px;
     display: inline-block;
     flex-direction: column;
     overflow: auto;
     overflow-x: hidden;
     background-color: beige;
     border: 1px solid black;
+    position: absolute;
+    top: 60px;
 }
 
 #liste_carte table,td{
@@ -58,6 +62,7 @@ fieldset{
     border-collapse: collapse;
     width : 100%;
     height : 100%;
+    min-height: 60px;
 }
 #liste_carte td:hover{
     background-color: whitesmoke;
