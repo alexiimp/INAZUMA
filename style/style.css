@@ -29,9 +29,11 @@ div{
     align-items: center;
     justify-content: center;
     height: 60px;
-    width: 50%;
+    width: 30%;
     border : 1px solid black;
+    border-radius: 5px;
     margin-bottom: 0;
+    background-color: beige;
 }
 
 fieldset{
@@ -48,7 +50,7 @@ fieldset{
 
 
 #liste_carte{
-    width: 50%;
+    width: 30%;
     min-height: 60px;
     max-height: 249px;
     display: inline-block;
@@ -111,7 +113,7 @@ fieldset{
 
 
 #comp{
-    width : 75%;
+    width : 50%;
     table-layout: fixed;
     border-spacing: 10px;
 }
