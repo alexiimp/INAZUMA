@@ -61,6 +61,7 @@ fieldset{
     border: 1px solid black;
     position: absolute;
     top: 60px;
+    z-index: 1;
 }
 
 #liste_carte table,td{
