@@ -163,6 +163,7 @@ function compare(cle,val1,val2,row){
             }
         }
         row.appendChild(td);
+        adjust(td)
     }
 
 
@@ -252,4 +253,12 @@ function afficherPersos(){
         div.appendChild(table);
         racine.appendChild(div);
     })
+}
+
+function adjust(td){
+    let nb=100
+    while (td.offsetHeight!==td.offsetWidth){
+        td.style.fontSize = nb+"%"
+        nb-=5
+    }
 }

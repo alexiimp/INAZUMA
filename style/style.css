@@ -117,10 +117,9 @@ fieldset{
 
 
 #comp{
-    width : 60%;
+    width : 65%;
     table-layout: fixed;
     border-spacing: 10px;
-
 }
 #comp th{
     border-bottom: 1px solid black;
@@ -128,15 +127,14 @@ fieldset{
     text-transform: uppercase;
 }
 
-
 #comp td{
     position: relative;
     border: 1px solid black;
-    width : 100%;
     font-family: "Candara Light", serif;
     text-align: center;
     animation : tourne 1s 1;
     animation-fill-mode: both;
+    font-size: 100%;
 }
 
 @keyframes tourne {
