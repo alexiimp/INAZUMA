@@ -7,6 +7,7 @@ body{
     background-attachment: fixed;
     background-position: center center;
     background-size : 100%;
+
 }
 
 div{
@@ -116,12 +117,15 @@ fieldset{
 
 
 #comp{
-    width : 50%;
+    width : 60%;
     table-layout: fixed;
     border-spacing: 10px;
+
 }
 #comp th{
     border-bottom: 1px solid black;
+    font-family: 'Ubuntu', serif;
+    text-transform: uppercase;
 }
 
 
@@ -129,8 +133,8 @@ fieldset{
     position: relative;
     border: 1px solid black;
     width : 100%;
+    font-family: "Candara Light", serif;
     text-align: center;
-    font-family: "Candara Light";
     animation : tourne 1s 1;
     animation-fill-mode: both;
 }
