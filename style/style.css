@@ -19,6 +19,8 @@ div{
     width: 30%;
 }
 #accueil{
+    display: flex;
+    flex-direction: column;
     background-color: beige;
     border: 1px solid black;
     border-radius: 5px;
@@ -27,6 +29,28 @@ div{
     margin-bottom: 25px;
     font-family: 'Ubuntu', serif;
     text-transform: uppercase;
+}
+
+#indices{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.indice{
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    font-size: 70%;
+    color: grey;
+}
+
+.logoIndice{
+    width: 30%;
+    margin-top: 10px;
+
 }
 #racine{
     width: 100%;
