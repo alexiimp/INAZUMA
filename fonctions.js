@@ -274,4 +274,22 @@ function etatIndice(){
     if (dejaVu.length>=2){
         indices.style.display = 'flex';
     }
+    else
+        return
+    for (let i=0;i<indices.children.length;i++){
+        let indice = indices.children[i];
+        let compt;
+        if(i===0)
+            compt = 6-dejaVu.length
+        else
+            compt = 9-dejaVu.length
+        if (compt>0){
+            let p = indice.getElementsByTagName('p')[0]
+            p.innerText = p.innerText.slice(0,-9)+" "+compt+" essais"
+        }
+        else{
+
+        }
+
+    }
 }
