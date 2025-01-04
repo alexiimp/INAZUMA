@@ -33,7 +33,9 @@
             <label for="guess"></label>
             <input type='text' name='guess' id='guess' placeholder='Nom de personnage, alias'
                    onkeyup='afficherPersos()'>
-            <button type='button' onclick='afficheComparaison(document.getElementById("guess").value)'>Envoyer</button>
+            <div id="divFleche" onclick='afficheComparaison(document.getElementById("guess").value)'>
+                <img src="images/logos/fleche.png" id="fleche" alt="envoie" >
+            </div>
         </div>
     </div>
     <script>
