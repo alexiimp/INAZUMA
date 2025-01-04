@@ -76,6 +76,7 @@ fieldset{
 }
 #liste_carte td:hover{
     background-color: whitesmoke;
+    cursor: pointer;
 }
 .selected{
     background-color: #dcdcdc;
@@ -135,6 +136,11 @@ fieldset{
     animation : tourne 1s 1;
     animation-fill-mode: both;
     font-size: 100%;
+}
+
+#comp td:hover{
+    cursor: default;
+    filter: brightness(0.90);
 }
 
 @keyframes tourne {
