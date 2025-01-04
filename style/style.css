@@ -32,9 +32,7 @@ div{
 }
 
 #indices{
-    display: flex;
-    justify-content: space-between;
-
+    display: none;
 }
 
 .indice{

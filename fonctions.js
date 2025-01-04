@@ -72,6 +72,7 @@ function afficheComparaison(nom1){
         for (let cle in j1){
             compare(cle,j1[cle],j2[cle],row);
         }
+        etatIndice()
         console.log(j1['Nom']+" vs "+j2['Nom'])
     })
 }
@@ -268,4 +269,9 @@ function adjust(td){
     }
 }
 
-function afficheNom(e){}
+function etatIndice(){
+    let indices = document.getElementById('indices')
+    if (dejaVu.length>=2){
+        indices.style.display = 'flex';
+    }
+}
