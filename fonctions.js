@@ -292,9 +292,25 @@ function etatIndice(){
             logo.style.width = '27%'
             p.innerText = p.innerText.slice(0,-14)
             indice.classList.add('disponible')
-
+            indice.setAttribute('onclick','revele('+indice.id+')')
 
         }
 
+    }
+}
+function revele(indice){
+    let p = indice.getElementsByTagName("p")[0]
+    let img = indice.getElementsByTagName('img')[0]
+    if (indice.classList.contains('revele')){
+        indice.classList.remove('revele')
+        p.style.display='contents'
+        img.style.display = "flex"
+        indice.getElementsByTagName("p")[1].style.display = "none"
+    }
+    else{
+        indice.classList.add('revele')
+        p.style.display='none'
+        img.style.display = "none"
+        indice.getElementsByTagName("p")[1].style.display = "contents"
     }
 }

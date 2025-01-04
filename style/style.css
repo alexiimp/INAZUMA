@@ -33,6 +33,7 @@ div{
 
 #indices{
     display: none;
+    justify-content: space-between;
 }
 
 .indice{
@@ -43,6 +44,9 @@ div{
     border-radius: 5px;
     font-size: 70%;
     color: grey;
+    min-height: 75%;
+    min-width: 41%;
+    max-width: 41%;
 }
 .indice.disponible{
     font-size: 80%;
@@ -52,6 +56,11 @@ div{
 .indice.disponible:hover{
     cursor: pointer;
     transform: scale(105%);
+}
+
+.indice.disponible.revele{
+    animation : tourne 1s 1;
+    animation-fill-mode: both;
 }
 
 .logoIndice{
