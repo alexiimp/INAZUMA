@@ -283,11 +283,16 @@ function etatIndice(){
             compt = 6-dejaVu.length
         else
             compt = 9-dejaVu.length
+        let p = indice.getElementsByTagName('p')[0]
         if (compt>0){
-            let p = indice.getElementsByTagName('p')[0]
             p.innerText = p.innerText.slice(0,-9)+" "+compt+" essais"
         }
-        else{
+        else if (compt===0){
+            let logo =indice.getElementsByTagName('img')[0]
+            logo.style.width = '27%'
+            p.innerText = p.innerText.slice(0,-14)
+            indice.classList.add('disponible')
+
 
         }
 

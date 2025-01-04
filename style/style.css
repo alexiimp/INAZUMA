@@ -44,6 +44,15 @@ div{
     font-size: 70%;
     color: grey;
 }
+.indice.disponible{
+    font-size: 80%;
+    border-color: black;
+    color: black;
+}
+.indice.disponible:hover{
+    cursor: pointer;
+    transform: scale(105%);
+}
 
 .logoIndice{
     width: 30%;
@@ -128,7 +137,7 @@ fieldset{
     width: 80%;
     margin-left: 25px ;
     margin-right: 25px;
-    font-family: "Candara Light";
+    font-family: "Candara Light", serif;
 }
 
 .nomcontain{
