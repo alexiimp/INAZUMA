@@ -18,7 +18,16 @@ div{
 #logo{
     width: 30%;
 }
-
+#accueil{
+    background-color: beige;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 30%;
+    text-align: center;
+    margin-bottom: 25px;
+    font-family: 'Ubuntu', serif;
+    text-transform: uppercase;
+}
 #racine{
     width: 100%;
     display:flex;
