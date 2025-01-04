@@ -303,11 +303,14 @@ function revele(indice){
     let img = indice.getElementsByTagName('img')[0]
     if (indice.classList.contains('revele')){
         indice.classList.remove('revele')
-        p.style.display='contents'
+        indice.classList.add('cache')
+        p.style.display='flex'
         img.style.display = "flex"
         indice.getElementsByTagName("p")[1].style.display = "none"
     }
     else{
+        if (indice.classList.contains('cache'))
+            indice.classList.remove('cache')
         indice.classList.add('revele')
         p.style.display='none'
         img.style.display = "none"

@@ -34,6 +34,8 @@ div{
 #indices{
     display: none;
     justify-content: space-between;
+    height: 145px;
+    width: 100%;
 }
 
 .indice{
@@ -45,6 +47,7 @@ div{
     font-size: 70%;
     color: grey;
     min-height: 75%;
+    max-height: 75%;
     min-width: 41%;
     max-width: 41%;
 }
@@ -60,6 +63,10 @@ div{
 
 .indice.disponible.revele{
     animation : tourne 1s 1;
+    animation-fill-mode: both;
+}
+.indice.disponible.cache{
+    animation : tourne2 1s 1;
     animation-fill-mode: both;
 }
 
@@ -195,8 +202,15 @@ fieldset{
 
 @keyframes tourne {
     0% {opacity: 0;transform: rotateY(180deg);}
-    50%{opacity: 100%}
+    50%{opacity: 50%}
+    75%{opacity: 100%}
     100% { transform: rotateY(360deg);}
+}
+@keyframes tourne2 {
+    0% {opacity: 0;transform: rotateY(180deg);}
+    50%{opacity: 50%}
+    75%{opacity: 100%}
+    100% { transform: rotateY(0deg);}
 }
 
 .divPhoto:hover .divNom{
