@@ -87,7 +87,12 @@ function compare(cle,val1,val2,row){
             img.setAttribute('src','images/personnages/'+val1)
             img.setAttribute('class','photo_comp');
             img.setAttribute('alt','photo');
+            td.setAttribute('class','divPhoto')
+            let divNom = document.createElement('div');
+            divNom.setAttribute('class','divNom');
+            divNom.appendChild(document.createTextNode(val1.slice(0,-4).replace('-',' ')))
             td.appendChild(img);
+            td.appendChild(divNom)
         }
         else {
             td.appendChild(document.createTextNode(val1))
@@ -262,3 +267,5 @@ function adjust(td){
         nb-=5
     }
 }
+
+function afficheNom(e){}

@@ -148,9 +148,28 @@ fieldset{
     50%{opacity: 100%}
     100% { transform: rotateY(360deg);}
 }
+
+.divPhoto:hover .divNom{
+    visibility: visible;
+}
 .photo_comp{
     width: 100%;
     aspect-ratio: 1/1;
+}
+
+.divNom{
+    position: absolute;
+    background-color: whitesmoke;
+    border-radius: 15%;
+    color: grey;
+    font-size: 1vw;
+    right: 20%;
+    top:35%;
+    width: 60%;
+    height: 30%;
+    border: 2px solid grey;
+    padding: 1px;
+    visibility: hidden;
 }
 .sup{
     height: 100%;
