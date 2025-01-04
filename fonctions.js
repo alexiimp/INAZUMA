@@ -257,7 +257,7 @@ function afficherPersos(){
 
 function adjust(td){
     let nb=100
-    while (td.offsetHeight!==td.offsetWidth){
+    while (td.offsetHeight!==td.offsetWidth && nb>=50){
         td.style.fontSize = nb+"%"
         nb-=5
     }
