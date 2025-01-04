@@ -126,6 +126,7 @@ fieldset{
     border-bottom: 1px solid black;
     font-family: 'Ubuntu', serif;
     text-transform: uppercase;
+    padding-bottom: 5px;
 }
 
 #comp td{
