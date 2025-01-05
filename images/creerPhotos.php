@@ -12,5 +12,5 @@ function creerphoto(){
     fclose($csv);
     echo "Ajout de ".$i." personnages avec succes";
 }
-//creerphoto();
+creerphoto();
 ?>
