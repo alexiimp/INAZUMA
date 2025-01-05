@@ -68,16 +68,21 @@ function afficheComparaison(nom1){
         afficherPersos()
         dejaVu.push(j1['Nom']);
         let table = document.getElementById('comp');
-        let row = table.insertRow(1);
-        for (let cle in j1){
-            compare(cle,j1[cle],j2[cle],row);
+        let row = table.insertRow(1)
+        if (document.getElementsByTagName('title')[0].innerText.replaceAll(" ","").split('-')[1]==='Classique'){
+            for (let cle in j1){
+                compareClassique(cle,j1[cle],j2[cle],row);
+            }
+        }
+        else{
+            //autre fonction de comparaison
         }
         etatIndice()
         console.log(j1['Nom']+" vs "+j2['Nom'])
     })
 }
 
-function compare(cle,val1,val2,row){
+function compareClassique(cle,val1,val2,row){
     let cles = ["Photo","Genre","Equipe","Poste","Element","Origine","Classe","Apparition"]
     if (cles.includes(cle)){
         let td = document.createElement('td');
