@@ -197,12 +197,19 @@ function afficherPersos(){
     let table = document.createElement('table');
     table.setAttribute('id','table_carte')
     csv.then((s)=>{
-        if (!joueurDuJour)
-            joueurDuJour = s[Math.floor(Math.random()*s.length)]["Nom"]
+        if (!joueurDuJour){
+            let nb = Math.floor(Math.random()*s.length)
+            joueurDuJour = s[nb]["Nom"]
+
+            document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = s[nb]['Episode']
+            let descriptions = s[nb]['Descriptions'].split('-')
+            document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = descriptions[Math.floor(Math.random()*descriptions.length)]
+
+        }
         let vide = true;
         for (let joueur in s){
             joueur = s[joueur]
-            verifsurnom = VerifSurnoms(joueur['Surnoms'],nom)
+            let verifsurnom = VerifSurnoms(joueur['Surnoms'],nom)
             if ((VerifNom(joueur['Nom'],nom) || verifsurnom[0]) && !dejaVu.includes(joueur["Nom"])){
                 let tr = document.createElement('tr');
                 let td = document.createElement('td');
