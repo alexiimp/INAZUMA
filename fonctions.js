@@ -201,9 +201,9 @@ function afficherPersos(){
             let nb = Math.floor(Math.random()*s.length)
             joueurDuJour = s[nb]["Nom"]
 
-            document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = s[nb]['Episode']
+            document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = s[nb]['Episode'].replace(';',',')
             let descriptions = s[nb]['Descriptions'].split('-')
-            document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = descriptions[Math.floor(Math.random()*descriptions.length)]
+            document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')
 
         }
         let vide = true;
