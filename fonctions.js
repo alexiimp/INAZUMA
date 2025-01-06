@@ -14,6 +14,7 @@ async function getCsv(){
     }
     let nb = Math.floor(Math.random()*doc.length)
     document.getElementById('joueurdujour').innerText = doc[nb]['Nom']
+    getJoueur()
     return doc
 }
 const csv = getCsv();
@@ -32,8 +33,8 @@ function getJoueur(){
             }
         }
     })
-
 }
+
 const dejaVu =[];
 function VerifNom(nom,char){
     let noms = nom.split(' ');
