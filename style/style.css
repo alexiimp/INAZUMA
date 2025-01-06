@@ -196,12 +196,15 @@ fieldset{
     width : 55%;
     table-layout: fixed;
     border-spacing: 10px;
+    backdrop-filter: blur(1px);
+
 }
 #comp th{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid white;
     font-family: 'Ubuntu', serif;
     text-transform: uppercase;
     padding-bottom: 5px;
+    color: white;
 }
 
 #comp td{
