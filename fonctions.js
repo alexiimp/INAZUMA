@@ -12,10 +12,28 @@ async function getCsv(){
         }
         doc.push(obj);
     }
+    let nb = Math.floor(Math.random()*doc.length)
+    document.getElementById('joueurdujour').innerText = doc[nb]['Nom']
     return doc
 }
 const csv = getCsv();
 var joueurDuJour;
+function getJoueur(){
+    joueurDuJour = document.getElementById('joueurdujour').innerText
+    console.log(joueurDuJour)
+    csv.then((s)=>{
+        for (let joueur in s){
+            joueur=s[joueur]
+            if (joueur['Nom']===joueurDuJour){
+                document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = joueur['Episode'].replace(';',',')
+                let descriptions = joueur['Descriptions'].split('-')
+                document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')
+
+            }
+        }
+    })
+
+}
 const dejaVu =[];
 function VerifNom(nom,char){
     let noms = nom.split(' ');
@@ -87,7 +105,6 @@ function compareClassique(cle,val1,val2,row){
     if (cles.includes(cle)){
         let td = document.createElement('td');
         td.style.animationDelay = (cles.indexOf(cle)*0.6-0.6)+"s"
-        console.log(cles.indexOf(cle))
         if (cle==="Photo"){
             let img = document.createElement('img');
             img.setAttribute('src','images/personnages/'+val1)
@@ -202,15 +219,6 @@ function afficherPersos(){
     let table = document.createElement('table');
     table.setAttribute('id','table_carte')
     csv.then((s)=>{
-        if (!joueurDuJour){
-            let nb = Math.floor(Math.random()*s.length)
-            joueurDuJour = s[nb]["Nom"]
-
-            document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = s[nb]['Episode'].replace(';',',')
-            let descriptions = s[nb]['Descriptions'].split('-')
-            document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')
-
-        }
         let vide = true;
         for (let joueur in s){
             joueur = s[joueur]
