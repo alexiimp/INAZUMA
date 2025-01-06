@@ -29,7 +29,7 @@ function getJoueur(){
                 document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = joueur['Episode'].replace(';',',')
                 let descriptions = joueur['Descriptions'].split('-')
                 document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')
-
+                break
             }
         }
     })
@@ -77,6 +77,8 @@ function afficheComparaison(nom1){
             if (joueur1['Nom']===joueurDuJour){
                 j2=joueur1;
             }
+            if (j1 && j2)
+                break //on quitte la boucle si les deux personnages sont trouvés
         }
         if (!j1){/*Si le nom ne correspond a aucun perso*/
             return
