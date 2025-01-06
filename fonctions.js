@@ -298,11 +298,13 @@ function etatIndice(){
         let p = indice.getElementsByTagName('p')[0]
         if (compt>0){
             p.innerText = p.innerText.slice(0,-9)+" "+compt+" essais"
+            if(compt===1)
+                p.innerText = p.innerText.slice(0,-1)
         }
         else if (compt===0){
             let logo =indice.getElementsByTagName('img')[0]
             logo.style.width = '27%'
-            p.innerText = p.innerText.slice(0,-14)
+            p.innerText = p.innerText.slice(0,-13)
             indice.classList.add('disponible')
             indice.setAttribute('onclick','revele('+indice.id+')')
 
