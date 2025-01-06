@@ -96,11 +96,19 @@ function afficheComparaison(nom1){
         else{
             //autre fonction de comparaison
         }
+        row.children[row.children.length-1].onanimationend = () => {
+            console.log("Animation ended");
+            win(j1['Nom'],j2['Nom'])
+        };
         etatIndice()
         console.log(j1['Nom']+" vs "+j2['Nom'])
     })
 }
-
+function win(nom1,nom2){
+    if(nom1===nom2){
+        console.log('fini')
+    }
+}
 function compareClassique(cle,val1,val2,row){
     let cles = ["Photo","Genre","Equipe","Poste","Element","Origine","Classe","Apparition"]
     if (cles.includes(cle)){
