@@ -320,6 +320,14 @@ fieldset{
     background-color: khaki;
     border: 1px solid black;
     margin-bottom: 15%;
+    animation: scintille 1s infinite;
+    animation-direction: alternate;
+}
+
+@keyframes scintille{
+    from{ transform: scale(100%);}
+    to{ transform: scale(105%);}
+
 }
 #prochainMode > div{
     display: flex;
