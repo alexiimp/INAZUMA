@@ -123,6 +123,8 @@ function win(nom1,nom2){
             document.getElementById('NbEssais').innerText += dejaVu.length
             document.getElementById('NomPerso').innerText = nom1
             document.getElementById('victoire').style.display = 'flex'
+            document.getElementById('victoire').scrollIntoView()
+            document.getElementById('formulaire').style.display = 'none'
 
         })
     }
