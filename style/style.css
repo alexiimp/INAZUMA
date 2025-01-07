@@ -18,7 +18,7 @@ div{
 #joueurdujour{
     display: none;
 }
-#logo{
+.logo{
     width: 30%;
 }
 
@@ -27,10 +27,11 @@ div{
     border: 1px solid black;
     border-radius: 5px;
     width: 30%;
-}
-#accueil{
     display: flex;
     flex-direction: column;
+
+}
+#accueil{
     text-align: center;
     margin-bottom: 25px;
     font-family: 'Ubuntu', serif;
@@ -90,11 +91,11 @@ div{
 }
 
 #formulaire{
-    display: flex;
     align-items: center;
     justify-content: center;
     height: 60px;
     margin-bottom: 0;
+    flex-direction: row;
 }
 
 fieldset{
@@ -187,7 +188,6 @@ fieldset{
 }
 .surnom{
     font-size: 12px;
-    margin : 0;
 }
 
 
@@ -277,6 +277,74 @@ fieldset{
     opacity: 1;
     background: rgba(0, 0, 0, .4);
 }
+
+#victoire{
+    display: none;
+}
+
+#victoire > h3{
+    font-family: 'Ubuntu', serif;
+    text-transform: uppercase;
+    font-size: 2vw;
+}
+#victoire > div{
+    margin : 5px 15%;
+}
+#winPerso{
+    display: flex;
+    justify-content: space-between;
+}
+
+#photoVictoire{
+    width: 40%;
+}
+#divInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+#NomPerso{
+    font-family: 'Itim', serif;
+    font-size: 24px;
+    margin : 0;
+}
+
+#modeSuivant{
+    display: flex;
+    flex-direction: column;
+    font-size: 26px;
+    font-family: 'Ubuntu', serif;
+
+}
+#prochainMode{
+    background-color: khaki;
+    border: 1px solid black;
+    margin-bottom: 15%;
+}
+#prochainMode > div{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+#prochainMode h5{
+    margin: 0;
+    font-size: 24px;
+}
+
+#listeMode{
+    margin: 10% 0;
+    border-radius: 10px;
+    border: 1px solid black;
+    height: 15px;
+    justify-content: space-between;
+    background-color: khaki;
+}
+
+#listeMode > img{
+    width: 25%;
+}
+
 
 /* width */
 ::-webkit-scrollbar {

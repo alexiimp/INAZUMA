@@ -107,8 +107,24 @@ function afficheComparaison(nom1){
     })
 }
 function win(nom1,nom2){
-    if(nom1===nom2){
+    if(nom1===nom2 && joueurDuJour===nom2){
         console.log('fini')
+        csv.then((s)=>{
+            let perso;
+            for (let joueur in s){
+                joueur = s[joueur]
+                if (joueur['Nom']===nom1){
+                    perso=joueur
+                    break
+                }
+            }
+            let img = document.getElementById('photoVictoire')
+            img.setAttribute('src','images/personnages/'+perso['Photo'])
+            document.getElementById('NbEssais').innerText += dejaVu.length
+            document.getElementById('NomPerso').innerText = nom1
+            document.getElementById('victoire').style.display = 'flex'
+
+        })
     }
 }
 function compareClassique(cle,val1,val2,row){
@@ -256,7 +272,6 @@ function afficherPersos(){
                 p.appendChild(texte);
                 if (verifsurnom[0]){
                     let surnom = document.createElement('p');
-                    surnom.style.fontSize = "12px"
                     let texte2 = document.createTextNode('Alias : '+verifsurnom[1]);
                     surnom.appendChild(texte2);
                     let div = document.createElement('div');
