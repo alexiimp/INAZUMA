@@ -125,8 +125,10 @@ function win(nom1,nom2){
             document.getElementById('victoire').style.display = 'flex'
             document.getElementById('victoire').scrollIntoView()
             document.getElementById('formulaire').style.display = 'none'
+            etatIndice()
 
         })
+        //On révèle les indices en cas de victoire
     }
 }
 function compareClassique(cle,val1,val2,row){
@@ -319,7 +321,7 @@ function adjust(td){
 
 function etatIndice(){
     let indices = document.getElementById('indices')
-    if (dejaVu.length>=2){
+    if (dejaVu.length>=2 || document.getElementById("victoire").style.display==='flex'){
         indices.style.display = 'flex';
     }
     else
@@ -327,7 +329,9 @@ function etatIndice(){
     for (let i=0;i<indices.children.length;i++){
         let indice = indices.children[i];
         let compt;
-        if(i===0)
+        if(document.getElementById('victoire').style.display==='flex')
+            compt=0
+        else if(i===0)
             compt = 6-dejaVu.length
         else
             compt = 9-dejaVu.length
