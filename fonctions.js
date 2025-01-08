@@ -122,6 +122,7 @@ function afficheComparaison(nom1){
 
 function compare(row,nom) {
     let td = document.createElement('td');
+    td.style.padding = '1%'
     let img = document.createElement('img');
     img.setAttribute('src','images/personnages/'+nom.replaceAll(' ','-')+".jpg")
     img.setAttribute('class','photoDescription');
