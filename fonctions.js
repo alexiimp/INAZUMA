@@ -14,21 +14,27 @@ async function getCsv(){
     }
     let nb = Math.floor(Math.random()*doc.length)
     document.getElementById('joueurdujour').innerText = doc[nb]['Nom']
-    getJoueur()
+    getJoueurInfo()
     return doc
 }
 const csv = getCsv();
 var joueurDuJour;
-function getJoueur(){
+function getJoueurInfo(){
     joueurDuJour = document.getElementById('joueurdujour').innerText
     console.log(joueurDuJour)
     csv.then((s)=>{
         for (let joueur in s){
             joueur=s[joueur]
             if (joueur['Nom']===joueurDuJour){
-                document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = joueur['Episode'].replace(';',',')
-                let descriptions = joueur['Descriptions'].split('-')
-                document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')
+                if(getPageName()==='Classique'){
+                    document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = joueur['Episode'].replace(';',',')
+                    let descriptions = joueur['Descriptions'].split('-')
+                    document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')
+                }
+                else if (getPageName()==='Description'){
+                    let descriptions = joueur['Descriptions'].split('-')
+                    document.getElementById('description').innerText = descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')
+                }
                 break
             }
 
