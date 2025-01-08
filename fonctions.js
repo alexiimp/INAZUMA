@@ -31,11 +31,16 @@ function getJoueur(){
                 document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')
                 break
             }
+
         }
     })
 }
 
 const dejaVu =[];
+
+function getPageName(){
+    return document.getElementsByTagName('title')[0].innerText.replaceAll(" ","").split('-')[1]
+}
 function VerifNom(nom,char){
     let noms = nom.split(' ');
     let chars = char.split(' ');
@@ -90,7 +95,7 @@ function afficheComparaison(nom1){
         dejaVu.push(j1['Nom']);
         let table = document.getElementById('comp');
         let row = table.insertRow(1)
-        if (document.getElementsByTagName('title')[0].innerText.replaceAll(" ","").split('-')[1]==='Classique'){
+        if (getPageName()==='Classique'){
             for (let cle in j1){
                 compareClassique(cle,j1[cle],j2[cle],row);
             }
