@@ -320,8 +320,12 @@ fieldset{
     background-color: khaki;
     border: 1px solid black;
     margin-bottom: 15%;
-    animation: scintille 1s infinite;
+    animation: scintille 800ms infinite;
     animation-direction: alternate;
+}
+
+#prochainMode:hover{
+    animation: none;
 }
 
 @keyframes scintille{
