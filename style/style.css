@@ -41,7 +41,9 @@ a{
     font-family: 'Ubuntu', serif;
     text-transform: uppercase;
 }
-
+#description{
+    width: 75%;
+}
 #indices{
     display: none;
     justify-content: space-between;

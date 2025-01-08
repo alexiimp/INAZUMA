@@ -33,7 +33,7 @@ function getJoueurInfo(){
                 }
                 else if (getPageName()==='Description'){
                     let descriptions = joueur['Descriptions'].split('-')
-                    document.getElementById('description').innerText = descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')
+                    document.getElementById('description').innerText = '"'+descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')+'"'
                 }
                 break
             }
