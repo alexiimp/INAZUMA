@@ -346,12 +346,19 @@ function etatIndice(){
             logo.style.width = '27%'
             p.innerText = p.innerText.slice(0,-13)
             indice.classList.add('disponible')
-            indice.setAttribute('onclick','revele('+indice.id+')')
-
+            indice.setAttribute('onclick','revele2('+indice.id+')')
         }
 
     }
 }
+function revele2(id){
+    if (id.style.transform==='rotateY(180deg)')
+        id.removeAttribute('style');
+    else
+        id.style.transform='rotateY(180deg)';
+}
+
+
 function revele(indice){
     let p = indice.getElementsByTagName("p")[0]
     let img = indice.getElementsByTagName('img')[0]

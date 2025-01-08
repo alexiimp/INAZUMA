@@ -57,6 +57,8 @@ div{
     max-height: 75%;
     min-width: 41%;
     max-width: 41%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
 }
 .indice.disponible{
     font-size: 80%;
@@ -68,13 +70,16 @@ div{
     transform: scale(105%);
 }
 
-.indice.disponible.revele{
-    animation : tourne 1s 1;
-    animation-fill-mode: both;
+.revele,.cache{
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
 }
-.indice.disponible.cache{
-    animation : tourne2 1s 1;
-    animation-fill-mode: both;
+
+.revele{
+    transform: rotateY(180deg);
 }
 
 .logoIndice{
