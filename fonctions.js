@@ -352,7 +352,7 @@ function etatIndice(){
             if(compt===1)
                 p.innerText = p.innerText.slice(0,-1)
         }
-        else if (compt===0){
+        else if (compt===0 && !indice.classList.contains('disponible')){
             let logo =indice.getElementsByTagName('img')[0]
             logo.style.width = '27%'
             p.innerText = p.innerText.slice(0,-13)
