@@ -287,6 +287,11 @@ fieldset{
     background: rgba(0, 0, 0, .4);
 }
 
+.photoDescription{
+    height: 45px;
+    margin:2%;
+}
+
 #victoire{
     display: none;
 }

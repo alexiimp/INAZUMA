@@ -99,15 +99,17 @@ function afficheComparaison(nom1){
         text.value = ""
         afficherPersos()
         dejaVu.push(j1['Nom']);
+        let row;
         let table = document.getElementById('comp');
-        let row = table.insertRow(1)
         if (getPageName()==='Classique'){
+            row = table.insertRow(1)
             for (let cle in j1){
                 compareClassique(cle,j1[cle],j2[cle],row);
             }
         }
         else{
-            //autre fonction de comparaison
+            row = table.insertRow(0)
+            compare(row,j1['Nom']);
         }
         row.children[row.children.length-1].onanimationend = () => {
             console.log("Animation ended");
@@ -117,6 +119,26 @@ function afficheComparaison(nom1){
         console.log(j1['Nom']+" vs "+j2['Nom'])
     })
 }
+
+function compare(row,nom) {
+    let td = document.createElement('td');
+    let img = document.createElement('img');
+    img.setAttribute('src','images/personnages/'+nom.replaceAll(' ','-')+".jpg")
+    img.setAttribute('class','photoDescription');
+    img.setAttribute('alt','photo');
+    let p = document.createElement('p');
+    p.appendChild(document.createTextNode(nom))
+    p.style.marginTop = '0'
+    td.appendChild(img);
+    td.appendChild(p)
+    if (nom===joueurDuJour){
+        td.style.backgroundColor='green'
+    }
+    else
+        td.style.backgroundColor='red'
+    row.appendChild(td);
+}
+
 function win(nom1,nom2){
     if(nom1===nom2 && joueurDuJour===nom2){
         console.log('fini')
@@ -139,7 +161,6 @@ function win(nom1,nom2){
             etatIndice()
 
         })
-        //On révèle les indices en cas de victoire
     }
 }
 function compareClassique(cle,val1,val2,row){
