@@ -346,35 +346,14 @@ function etatIndice(){
             logo.style.width = '27%'
             p.innerText = p.innerText.slice(0,-13)
             indice.classList.add('disponible')
-            indice.setAttribute('onclick','revele2('+indice.id+')')
+            indice.setAttribute('onclick','revele('+indice.id+')')
         }
 
     }
 }
-function revele2(id){
+function revele(id){
     if (id.style.transform==='rotateY(180deg)')
         id.removeAttribute('style');
     else
         id.style.transform='rotateY(180deg)';
-}
-
-
-function revele(indice){
-    let p = indice.getElementsByTagName("p")[0]
-    let img = indice.getElementsByTagName('img')[0]
-    if (indice.classList.contains('revele')){
-        indice.classList.remove('revele')
-        indice.classList.add('cache')
-        p.style.display='flex'
-        img.style.display = "flex"
-        indice.getElementsByTagName("p")[1].style.display = "none"
-    }
-    else{
-        if (indice.classList.contains('cache'))
-            indice.classList.remove('cache')
-        indice.classList.add('revele')
-        p.style.display='none'
-        img.style.display = "none"
-        indice.getElementsByTagName("p")[1].style.display = "contents"
-    }
 }
