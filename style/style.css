@@ -331,6 +331,7 @@ fieldset{
 
 #prochainMode:hover{
     animation: none;
+    cursor: pointer;
 }
 
 @keyframes scintille{
@@ -358,8 +359,13 @@ fieldset{
     background-color: khaki;
 }
 
-#listeMode > img{
+.mode{
     width: 25%;
+}
+
+.mode:hover{
+    transform: scale(105%);
+    cursor: pointer;
 }
 
 
