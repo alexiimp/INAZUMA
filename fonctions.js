@@ -153,7 +153,7 @@ function win(nom1,nom2){
             }
             let img = document.getElementById('photoVictoire')
             img.setAttribute('src','images/personnages/'+perso['Photo'])
-            document.getElementById('NbEssais').innerText += dejaVu.length
+            document.getElementById('NbEssais').innerText = document.getElementById('NbEssais').innerText.replaceAll("X",dejaVu.length)
             document.getElementById('NomPerso').innerText = nom1
             document.getElementById('victoire').style.display = 'flex'
             document.getElementById('victoire').scrollIntoView({behavior : "smooth"})
