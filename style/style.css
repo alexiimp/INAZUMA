@@ -332,7 +332,7 @@ fieldset{
     font-family: 'Ubuntu', serif;
 
 }
-#prochainMode{
+.prochainMode{
     background-color: khaki;
     border: 1px solid black;
     margin-bottom: 15%;
@@ -340,7 +340,7 @@ fieldset{
     animation-direction: alternate;
 }
 
-#prochainMode:hover{
+.prochainMode:hover{
     animation: none;
     cursor: pointer;
 }
@@ -350,13 +350,13 @@ fieldset{
     to{ transform: scale(105%);}
 
 }
-#prochainMode > div{
+.prochainMode > div{
     display: flex;
     flex-direction: column;
     align-items: start;
 }
 
-#prochainMode h5{
+.prochainMode h5{
     margin: 0;
     font-size: 24px;
 }
