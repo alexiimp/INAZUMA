@@ -27,13 +27,13 @@ function getJoueurInfo(){
             joueur=s[joueur]
             if (joueur['Nom']===joueurDuJour){
                 if(getPageName()==='Classique'){
-                    document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = joueur['Episode'].replace(';',',')
+                    document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = joueur['Episode'].replaceAll(';',',')
                     let descriptions = joueur['Descriptions'].split('-')
                     document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')
                 }
                 else if (getPageName()==='Description'){
                     let descriptions = joueur['Descriptions'].split('-')
-                    document.getElementById('description').innerText = '"'+descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')+'"'
+                    document.getElementById('description').innerText = '"'+descriptions[Math.floor(Math.random()*descriptions.length)].replaceAll(';',',')+'"'
                     document.getElementById('indiceElement').getElementsByTagName('p')[1].innerText = joueur['Element']
                     document.getElementById('indicePoste').getElementsByTagName('p')[1].innerText = joueur['Poste']
                 }
