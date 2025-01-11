@@ -3,29 +3,120 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-image : url("../images/Fond.jpg");
+    background-attachment: fixed;
+    background-position: center center;
+    background-size : cover;
+
 }
 
 div{
     display: flex;
     align-items: center;
     justify-content: center;
-
+}
+a{
+    text-decoration: none;
+    color: black;
 }
 
+#accueil{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#joueurdujour{
+    display: none;
+}
+.logo{
+    width: 30%;
+}
+.logo:hover{
+    cursor: pointer;
+}
+
+.mainDiv{
+    background-color: beige;
+    border: 1px solid black;
+    border-radius: 5px;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+
+}
+#entete{
+    text-align: center;
+    margin-bottom: 25px;
+    font-family: 'Ubuntu', serif;
+    text-transform: uppercase;
+}
+#description{
+    width: 75%;
+}
+#indices{
+    display: none;
+    justify-content: space-between;
+    height: 145px;
+    width: 100%;
+}
+
+.indice{
+    display: flex;
+    flex-direction: column;
+    margin: 15px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    font-size: 70%;
+    color: grey;
+    min-height: 75%;
+    max-height: 75%;
+    min-width: 41%;
+    max-width: 41%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+}
+.indice.disponible{
+    font-size: 80%;
+    border-color: black;
+    color: black;
+}
+.indice.disponible:hover{
+    cursor: pointer;
+    transform: scale(105%);
+}
+
+.revele,.cache{
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+}
+
+.revele{
+    transform: rotateY(180deg);
+}
+
+.logoIndice{
+    width: 30%;
+    margin-top: 10px;
+
+}
 #racine{
     width: 100%;
     display:flex;
     flex-direction: column;
+    position: relative;
+    margin-bottom: 70px;
 }
 
 #formulaire{
-    display: flex;
     align-items: center;
     justify-content: center;
     height: 60px;
-    width: 50%;
-    border : 1px solid black;
     margin-bottom: 0;
+    flex-direction: row;
 }
 
 fieldset{
@@ -38,19 +129,38 @@ fieldset{
     border-radius: 2px;
     height: 60%;
     font-size: 15px;
+    margin: auto;
+}
+
+#divFleche{
+    height: 100%;
+    margin-right: auto;
+}
+#divFleche:hover{
+    cursor: pointer;
+    transform: scale(105%);
+}
+
+#fleche{
+    height: 40%;
+    padding: 0;
+    margin: 0;
 }
 
 
 #liste_carte{
-    width: 50%;
-    min-height: 70px;
-    max-height: 189px;
+    width: 30%;
+    min-height: 60px;
+    max-height: 249px;
     display: inline-block;
     flex-direction: column;
     overflow: auto;
     overflow-x: hidden;
     background-color: beige;
     border: 1px solid black;
+    position: absolute;
+    top: 60px;
+    z-index: 1;
 }
 
 #liste_carte table,td{
@@ -58,9 +168,11 @@ fieldset{
     border-collapse: collapse;
     width : 100%;
     height : 100%;
+    min-height: 60px;
 }
 #liste_carte td:hover{
     background-color: whitesmoke;
+    cursor: pointer;
 }
 .selected{
     background-color: #dcdcdc;
@@ -74,14 +186,14 @@ fieldset{
 
 .photo_carte{
     height: 50px;
-    width: 45px;
+    width: 50px;
 
 }
 .carte p{
     width: 80%;
     margin-left: 25px ;
     margin-right: 25px;
-    font-family: "Candara Light";
+    font-family: "Candara Light", serif;
 }
 
 .nomcontain{
@@ -97,38 +209,73 @@ fieldset{
 }
 .surnom{
     font-size: 12px;
-    margin : 0;
 }
 
 
 #comp{
-    width : 75%;
+    width : 55%;
     table-layout: fixed;
     border-spacing: 10px;
+    backdrop-filter: blur(1px);
+
 }
 #comp th{
-    border-bottom: 1px solid black;
+    border-bottom: 1px solid white;
+    font-family: 'Ubuntu', serif;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    color: white;
 }
-
 
 #comp td{
     position: relative;
     border: 1px solid black;
-    width : 100%;
+    font-family: "Candara Light", serif;
     text-align: center;
-    font-family: "Candara Light";
     animation : tourne 1s 1;
     animation-fill-mode: both;
+    font-size: 100%;
+}
+
+#comp td:hover{
+    cursor: default;
+    filter: brightness(0.90);
 }
 
 @keyframes tourne {
     0% {opacity: 0;transform: rotateY(180deg);}
-    50%{opacity: 100%}
+    50%{opacity: 50%}
+    75%{opacity: 100%}
     100% { transform: rotateY(360deg);}
+}
+@keyframes tourne2 {
+    0% {opacity: 0;transform: rotateY(180deg);}
+    50%{opacity: 50%}
+    75%{opacity: 100%}
+    100% { transform: rotateY(0deg);}
+}
+
+.divPhoto:hover .divNom{
+    visibility: visible;
 }
 .photo_comp{
     width: 100%;
     aspect-ratio: 1/1;
+}
+
+.divNom{
+    position: absolute;
+    background-color: whitesmoke;
+    border-radius: 15%;
+    color: grey;
+    font-size: 1vw;
+    right: 20%;
+    top:35%;
+    width: 60%;
+    height: 30%;
+    border: 2px solid grey;
+    padding: 1px;
+    visibility: hidden;
 }
 .sup{
     height: 100%;
@@ -151,6 +298,97 @@ fieldset{
     opacity: 1;
     background: rgba(0, 0, 0, .4);
 }
+
+.photoDescription{
+    height: 75px;
+    margin:1%;
+}
+
+#victoire{
+    display: none;
+}
+
+#victoire > h3{
+    font-family: 'Ubuntu', serif;
+    text-transform: uppercase;
+    font-size: 2vw;
+}
+#victoire > div{
+    margin : 5px 15%;
+}
+#winPerso{
+    display: flex;
+    justify-content: space-between;
+}
+
+#photoVictoire{
+    width: 40%;
+}
+#divInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+#NomPerso{
+    font-family: 'Itim', serif;
+    font-size: 24px;
+    margin : 0;
+}
+
+#modeSuivant{
+    display: flex;
+    flex-direction: column;
+    font-size: 26px;
+    font-family: 'Ubuntu', serif;
+
+}
+.prochainMode{
+    background-color: khaki;
+    border: 1px solid black;
+    margin-bottom: 15%;
+    animation: scintille 800ms infinite;
+    animation-direction: alternate;
+}
+
+.prochainMode:hover{
+    animation: none;
+    cursor: pointer;
+}
+
+@keyframes scintille{
+    from{ transform: scale(100%);}
+    to{ transform: scale(105%);}
+
+}
+.prochainMode > div{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.prochainMode h5{
+    margin: 0;
+    font-size: 24px;
+}
+
+#listeMode{
+    margin: 10% 0;
+    border-radius: 10px;
+    border: 1px solid black;
+    height: 15px;
+    justify-content: space-between;
+    background-color: khaki;
+}
+
+.mode{
+    width: 25%;
+}
+
+.mode:hover{
+    transform: scale(105%);
+    cursor: pointer;
+}
+
 
 /* width */
 ::-webkit-scrollbar {

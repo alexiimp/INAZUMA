@@ -1,6 +1,6 @@
 <head>
     <meta charset='utf-8'>
-    <title>Inazumadle - Classique</title>
+    <title>Inazumadle - Description</title>
     <link rel='stylesheet' type='text/css' href='style/style.css'>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,26 +15,27 @@
     <script src="fonctions.js"></script>
     <img src="images/logos/logo.png" alt="titre" class="logo">
     <div id="entete" class="mainDiv">
-        <h3>Devinez le personnage d'inazuma d'aujourd'hui !</h3>
+        <h3>Devinez à quel personnages appartient cette description !</h3>
+        <p id="description"></p>
         <div id="indices">
-            <div class="indice" id="indiceApparition">
+            <div class="indice" id="indiceElement">
                 <div class="cache">
-                    <img src="images/logos/tv.png" alt="tv" class="logoIndice">
-                    <p>Indice de première apparition dans X essais</p>
+                    <img src="images/logos/elements.png" alt="éléments" class="logoIndice">
+                    <p>Indice de l'élément dans X essais</p>
+                </div>
+                <div class="revele">
+                    <p></p>
+                </div>
+            </div>
+            <div class="indice" id="indicePoste">
+                <div class="cache">
+                    <img src="images/logos/position.png" alt="poste" class="logoIndice">
+                    <p>Indice de poste dans X essais</p>
                 </div>
                 <div class="revele">
                     <p></p>
                 </div>
 
-            </div>
-            <div class="indice" id="indiceDescription">
-                <div class="cache">
-                    <img src="images/logos/livre.png" alt="livre" class="logoIndice">
-                    <p>Indice de description dans X essais</p>
-                </div>
-                <div class="revele">
-                    <p></p>
-                </div>
             </div>
         </div>
     </div>
@@ -65,18 +66,7 @@
 
     </script>
     <div style="overflow-x: auto;">
-    <table id="comp">
-        <tr>
-            <th>Perso</th>
-            <th>Genre</th>
-            <th>Equipes</th>
-            <th>Poste</th>
-            <th>Element</th>
-            <th>Origine</th>
-            <th>Classe</th>
-            <th>Apparition</th>
-        </tr>
-    </table>
+    <table id="comp"></table>
     </div>
 
 
@@ -122,15 +112,13 @@
         </div>
         <div id="modeSuivant">
             <h4>Mode suivant :</h4>
-            <a href="description.html">
-                <div class="prochainMode">
-                    <img src="images/logos/pages.png" alt="logo" class="logo">
-                    <div class="nomcontain">
-                        <h5>Description</h5>
-                        <p class="surnom">Trouve le personnage à partir de sa description</p>
-                    </div>
+            <div class="prochainMode">
+                <img src="images/logos/pages.png" alt="logo" class="logo">
+                <div class="nomcontain">
+                    <h5>Description</h5>
+                    <p class="surnom">Trouve le personnage à partir de sa description</p>
                 </div>
-            </a>
+            </div>
         </div>
         <div>
             <div id="listeMode">
