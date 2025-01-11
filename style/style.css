@@ -25,6 +25,8 @@ a{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    font-size: 26px;
+    font-family: 'Ubuntu', serif;
 }
 #joueurdujour{
     display: none;
@@ -342,15 +344,18 @@ fieldset{
     font-family: 'Ubuntu', serif;
 
 }
-.prochainMode{
+.mode{
     background-color: khaki;
     border: 1px solid black;
     margin-bottom: 15%;
+}
+
+.prochainMode{
     animation: scintille 800ms infinite;
     animation-direction: alternate;
 }
 
-.prochainMode:hover{
+.mode:hover{
     animation: none;
     cursor: pointer;
 }
@@ -360,13 +365,13 @@ fieldset{
     to{ transform: scale(105%);}
 
 }
-.prochainMode > div{
+.mode > div{
     display: flex;
     flex-direction: column;
     align-items: start;
 }
 
-.prochainMode h5{
+.mode h5{
     margin: 0;
     font-size: 24px;
 }
@@ -380,11 +385,11 @@ fieldset{
     background-color: khaki;
 }
 
-.mode{
+.logoMode{
     width: 25%;
 }
 
-.mode:hover{
+.logoMode:hover{
     transform: scale(105%);
     cursor: pointer;
 }
