@@ -159,10 +159,9 @@ function win(nom1,nom2){
             document.getElementById('NbEssais').innerText = document.getElementById('NbEssais').innerText.replaceAll("X",dejaVu.length)
             document.getElementById('NomPerso').innerText = nom1
             document.getElementById('victoire').style.display = 'flex'
-            document.getElementById('victoire').scrollIntoView({behavior : "smooth"})
             document.getElementById('formulaire').style.display = 'none'
             etatIndice()
-
+            document.getElementById('victoire').scrollIntoView({block:"center",inline:"nearest",behavior:"smooth"})
         })
     }
 }
