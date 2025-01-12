@@ -329,6 +329,7 @@ fieldset{
 #divInfo{
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 #NomPerso{
