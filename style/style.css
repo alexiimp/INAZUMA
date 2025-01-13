@@ -105,6 +105,12 @@ a{
     margin-top: 10px;
 
 }
+
+#donnees{
+    text-transform: none;
+    color: #888888;
+    width: 70%;
+}
 #racine{
     width: 100%;
     display:flex;
