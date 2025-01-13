@@ -19,7 +19,24 @@ a{
     text-decoration: none;
     color: black;
 }
+#sousTitre{
+    font-family: "reggae one", serif;
+    text-transform: uppercase;
+    border: 3px solid #534e41;
+    background-color: #cfa363;
+    border-radius: 5px;
+    width: 40%;
+    font-size: 19px;
+    text-align: center;
 
+}
+
+#inazuma{
+    background: linear-gradient(#FCE60F,#F4A112);
+    color: transparent;
+    background-clip: text;
+
+}
 #accueil{
     width: 30%;
     display: flex;
