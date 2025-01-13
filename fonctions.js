@@ -168,6 +168,8 @@ function win(nom1,nom2){
 function compareClassique(cle,val1,val2,row){
     let cles = ["Photo","Genre","Equipe","Poste","Element","Origine","Classe","Apparition"]
     if (cles.includes(cle)){
+        if (dejaVu.length===1)//On retire les instructions si un premier joueur a été cherché
+            document.getElementById('instructions').style.display = 'none'
         let td = document.createElement('td');
         td.style.animationDelay = (cles.indexOf(cle)*0.6-0.6)+"s"
         if (cle==="Photo"){
