@@ -24,9 +24,11 @@ a{
     width: 30%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     font-size: 26px;
     font-family: 'Ubuntu', serif;
+}
+#accueil a{
+    margin-bottom: 10%;
 }
 #joueurdujour{
     display: none;
@@ -358,12 +360,12 @@ fieldset{
 .mode{
     background-color: khaki;
     border: 1px solid black;
-    margin-bottom: 15%;
 }
 
 .prochainMode{
     animation: scintille 800ms infinite;
     animation-direction: alternate;
+    margin-bottom: 15%;
 }
 
 .mode:hover{
