@@ -7,7 +7,7 @@ body{
     background-attachment: fixed;
     background-position: center center;
     background-size : cover;
-
+    padding-bottom: 100px;
 }
 
 div{
@@ -263,11 +263,18 @@ fieldset{
     border: 1px solid black;
     font-family: "Candara Light", serif;
     text-align: center;
-    animation : tourne 1s 1;
-    animation-fill-mode: both;
     font-size: 100%;
 }
-
+.classique{
+    animation : tourne 1s 1;
+    animation-fill-mode: both;
+}
+.incorrect{
+    animation: incorrect 400ms 2;
+}
+.correct{
+    animation: correct 400ms 2;
+}
 #comp td:hover{
     cursor: default;
     filter: brightness(0.90);
@@ -279,11 +286,15 @@ fieldset{
     75%{opacity: 100%}
     100% { transform: rotateY(360deg);}
 }
-@keyframes tourne2 {
-    0% {opacity: 0;transform: rotateY(180deg);}
-    50%{opacity: 50%}
-    75%{opacity: 100%}
-    100% { transform: rotateY(0deg);}
+@keyframes correct {
+    0% {transform: rotateZ(5deg)  scale(1.1)}
+    50%{transform: rotateZ(-5deg)}
+    100%{transform: rotateZ(5deg)  scale(1.1)}
+}
+@keyframes incorrect {
+    0% {left: -1%}
+    50%{left: 1%}
+    100%{left: -1%}
 }
 
 .divPhoto:hover .divNom{

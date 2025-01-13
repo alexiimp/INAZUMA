@@ -136,9 +136,12 @@ function compare(row,nom) {
     td.appendChild(p)
     if (nom===joueurDuJour){
         td.style.backgroundColor='green'
+        td.setAttribute('class','correct')
     }
-    else
+    else{
         td.style.backgroundColor='red'
+        td.setAttribute('class','incorrect')
+    }
     row.appendChild(td);
 }
 
@@ -172,6 +175,7 @@ function compareClassique(cle,val1,val2,row){
             document.getElementById('instructions').style.display = 'none'
         let td = document.createElement('td');
         td.style.animationDelay = (cles.indexOf(cle)*0.6-0.6)+"s"
+        td.setAttribute('class','classique')
         if (cle==="Photo"){
             let img = document.createElement('img');
             img.setAttribute('src','images/personnages/'+val1)
