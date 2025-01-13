@@ -406,7 +406,7 @@ fieldset{
     font-size: 24px;
 }
 
-#listeMode{
+.listeMode{
     margin: 10% 0;
     border-radius: 10px;
     border: 1px solid black;
