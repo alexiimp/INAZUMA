@@ -72,6 +72,10 @@ a{
     font-family: 'Ubuntu', serif;
     text-transform: uppercase;
 }
+#entete h3{
+    font-family: 'Reggae one', serif;
+    font-size: 1.1vw;
+}
 #description{
     width: 75%;
 }
