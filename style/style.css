@@ -79,6 +79,9 @@ a{
 #description{
     width: 75%;
 }
+#canva{
+    width: 75%;
+}
 #indices{
     display: none;
     justify-content: space-between;
