@@ -12,8 +12,18 @@ async function getCsv(){
         }
         doc.push(obj);
     }
-    let nb = Math.floor(Math.random()*doc.length)
-    document.getElementById('joueurdujour').innerText = doc[nb]['Nom']
+    if (getPageName()==='Classique'){
+        let nb = Math.floor(Math.random()*doc.length)
+        document.getElementById('joueurdujour').innerText = doc[nb]['Nom']
+    }
+    else{
+        do{
+            var nb = Math.floor(Math.random()*doc.length)
+            document.getElementById('joueurdujour').innerText = doc[nb]['Nom']
+            console.log(doc[nb][getPageName()])
+        }
+        while(!doc[nb][getPageName()])
+    }
     getJoueurInfo()
     return doc
 }
