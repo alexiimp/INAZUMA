@@ -49,7 +49,7 @@ function getJoueurInfo(){
                 }
                 else if(getPageName()==='Techniques'){
                     let techniques = joueur['Techniques'].split('-')
-                    let img = document.getElementById('canva')
+                    let img = document.getElementById('video')
                     img.setAttribute('alt','video de la technique normalement')
                     img.setAttribute('src','images/techniques/solo/'+techniques[Math.floor(Math.random()*techniques.length)])
                     console.log(img.src)
