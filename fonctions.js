@@ -378,6 +378,8 @@ function adjust(td){
 
 function etatIndice(){
     let indices = document.getElementById('indices')
+    if (!indices)
+        return
     if (dejaVu.length>=2 || document.getElementById("victoire").style.display==='flex'){
         indices.style.display = 'flex';
     }
