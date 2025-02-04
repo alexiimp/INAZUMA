@@ -416,11 +416,3 @@ function revele(id){
     else
         id.style.transform='rotateY(180deg)';
 }
-
-function colorCanva(){
-    let canva = document.getElementById('canva')
-    if (canva.style.filter)
-        canva.removeAttribute('style')
-    else
-        canva.style.filter = 'grayscale(0)'
-}

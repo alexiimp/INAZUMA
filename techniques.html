@@ -46,6 +46,18 @@
     </div>
     <p id="donnees">Les données vont jusqu'à la saison 3 et comprennent Inazuma Eleven : le Film.</p>
 </div>
+
+<script>
+    function colorCanva(){
+        let canva = document.getElementById('canva')
+        if (canva.style.filter)
+            canva.removeAttribute('style')
+        else
+            canva.style.filter = 'grayscale(0)'
+    }
+</script>
+
+
 <div id="racine">
     <div id='formulaire' class="mainDiv">
         <label for="guess"></label>
