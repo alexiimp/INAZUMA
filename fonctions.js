@@ -47,6 +47,13 @@ function getJoueurInfo(){
                     document.getElementById('indicePoste').getElementsByTagName('p')[1].innerText = joueur['Poste']
                     document.getElementById('indiceEquipe').getElementsByTagName('p')[1].innerText = joueur['Equipe']
                 }
+                else if(getPageName()==='Techniques'){
+                    let techniques = joueur['Techniques'].split('-')
+                    let img = document.getElementById('canva')
+                    img.setAttribute('alt','video de la technique normalement')
+                    img.setAttribute('src','images/techniques/solo/'+techniques[Math.floor(Math.random()*techniques.length)])
+                    console.log(img.src)
+                }
                 break
             }
 
