@@ -82,6 +82,7 @@ a{
 #canva{
     width: 75%;
     filter: grayscale(1);
+    margin: 5%;
 }
 #video{
     filter: blur(16px);
