@@ -81,6 +81,7 @@ a{
 }
 #canva{
     width: 75%;
+    filter: blur(16px) grayscale(1);
 }
 #indices{
     display: none;
