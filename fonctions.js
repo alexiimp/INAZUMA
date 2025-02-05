@@ -216,12 +216,13 @@ function win(nom1,nom2){
                         }
                     }
                 }
-                historique.innerHTML+=emojis
-                historique.innerHTML+= "<br>"
-                if (compt<=6)
+                historique.innerHTML+=emojis+"<br>"
+                if (compt<=5)
                     compt++
-                else
+                else{
+                    historique.innerHTML+="+"+(rows.length-1-compt)+" de plus"
                     break
+                }
             }
         }
     }
