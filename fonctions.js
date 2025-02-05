@@ -1,5 +1,5 @@
 async function getCsv(){
-    res= await fetch('joueurs.csv');
+    let res= await fetch('joueurs.csv');
     let text=  await res.text();
     let doc = []
     let lignes = text.split("\r\n");
@@ -52,6 +52,9 @@ function getJoueurInfo(){
                     let img = document.getElementById('video')
                     img.setAttribute('alt','video de la technique normalement')
                     img.setAttribute('src','images/techniques/solo/'+techniques[Math.floor(Math.random()*techniques.length)])
+                    let imgClaire = document.getElementById('videoClaire')
+                    imgClaire.setAttribute('alt',img.getAttribute('alt'))
+                    imgClaire.setAttribute('src',img.getAttribute('src'))
                     console.log(img.src)
                 }
                 break

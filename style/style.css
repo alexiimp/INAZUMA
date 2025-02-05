@@ -88,6 +88,11 @@ a{
     filter: blur(12px);
     width: 100%;
 }
+
+#videoClaire{
+    width: 85%;
+    margin-top: 5%;
+}
 #indices{
     display: none;
     justify-content: space-between;
@@ -200,7 +205,7 @@ input:checked + .slider {
 }
 
 input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px aliceblue;
 }
 
 input:checked + .slider:before {
