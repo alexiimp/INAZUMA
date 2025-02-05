@@ -85,7 +85,7 @@ a{
     margin: 5%;
 }
 #video{
-    filter: blur(16px);
+    filter: blur(12px);
     width: 100%;
 }
 #indices{

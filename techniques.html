@@ -30,7 +30,7 @@
     <div id="switchs">
         <div>
             <label class="switch">
-                <input type="checkbox" onclick="">
+                <input type="checkbox" onclick="deblur()" id="blurred">
                 <span class="slider"></span>
             </label>
             <span >Chaque essai défloute légèrement l'image</span>
@@ -54,6 +54,15 @@
             canva.removeAttribute('style')
         else
             canva.style.filter = 'grayscale(0)'
+    }
+
+    var blur = 0;
+    function deblur(){
+        if (document.getElementById('blurred').checked)
+            document.getElementById('video').style.filter = 'blur('+(12-blur)+'px)'
+        else
+            document.getElementById('video').removeAttribute('style')
+
     }
 </script>
 

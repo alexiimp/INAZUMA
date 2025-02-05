@@ -160,6 +160,12 @@ function compare(row,nom) {
         td.setAttribute('class','incorrect')
     }
     row.appendChild(td);
+
+    if(document.getElementById('blurred').checked){
+        if ((12-blur)>6.6)
+            blur+=0.6
+        deblur()
+    }
 }
 
 function win(nom1,nom2){
