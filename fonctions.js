@@ -192,6 +192,38 @@ function win(nom1,nom2){
             etatIndice()
             document.getElementById('victoire').scrollIntoView({block:"center",inline:"nearest",behavior:"smooth"})
         })
+        if (getPageName()==="Classique"){
+            let table = document.getElementById("comp")
+            let rows = table.getElementsByTagName('tr')
+            let historique = document.getElementById('historique')
+            let compt=0
+            for (let row of rows){
+                let tds = row.getElementsByTagName("td")
+                let emojis = ""
+                for (let td of tds){
+                    if (td.classList.contains('classique')){
+                        if (td.style.backgroundColor==="orange")
+                            emojis+="🟨"
+                        else if (td.style.backgroundColor==="green")
+                            emojis+="🟩"
+                        else if (td.style.backgroundColor==="red"){
+                            if (td.getElementsByClassName('sup').length!==0)
+                                emojis+="⬆️"
+                            else if(td.getElementsByClassName('inf').length!==0)
+                                emojis+="⬇️"
+                            else
+                                emojis+="🟥"
+                        }
+                    }
+                }
+                historique.innerHTML+=emojis
+                historique.innerHTML+= "<br>"
+                if (compt<=6)
+                    compt++
+                else
+                    break
+            }
+        }
     }
 }
 function compareClassique(cle,val1,val2,row){
