@@ -165,8 +165,10 @@ function compare(row,nom) {
     row.appendChild(td);
 
     if(document.getElementById('blurred')&&document.getElementById('blurred').checked){
-        if ((12-blur)>6.6)
-            blur+=0.6
+        if ((18-blur)>12)
+            blur+=2
+        else if ((18-blur)>6)
+            blur+=1
         deblur()
     }
 }

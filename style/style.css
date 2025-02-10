@@ -85,7 +85,7 @@ a{
     margin: 5%;
 }
 #video{
-    filter: blur(12px);
+    filter: blur(18px);
     width: 100%;
 }
 
