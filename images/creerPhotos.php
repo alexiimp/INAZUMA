@@ -13,4 +13,17 @@ function creerphoto(){
     echo "Ajout de ".$i." personnages avec succes";
 }
 creerphoto();
+
+function nomsVideos(){
+    $fichiers = scandir("techniques/");
+    $i=0;
+    foreach ($fichiers as $fichier) {
+        if (strpos($fichier, "Clipchamp")){
+            $i+=1;
+            rename($fichier,substr($fichier,-26));
+        }
+    }
+    echo "Changement de ".$i." noms de video avec succes";
+}
+nomsVideos();
 ?>
