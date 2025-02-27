@@ -20,7 +20,7 @@ function nomsVideos(){
     foreach ($fichiers as $fichier) {
         if (strpos($fichier, "Clipchamp")){
             $i+=1;
-            rename($fichier,substr($fichier,-26));
+            rename("techniques/".$fichier,str_replace(" ‐ Réalisée avec Clipchamp","","techniques/".$fichier));
         }
     }
     echo "Changement de ".$i." noms de video avec succes";
