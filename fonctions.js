@@ -47,7 +47,7 @@ function getJoueurInfo(){
                     document.getElementById('indicePoste').getElementsByTagName('p')[1].innerText = joueur['Poste']
                     document.getElementById('indiceEquipe').getElementsByTagName('p')[1].innerText = joueur['Equipe']
                 }
-                else if(getPageName()==='Techniques'){
+                else if(getPageName()==='Supertechniques'){
                     let techniques = joueur['Techniques'].split('-')
                     let img = document.getElementById('video')
                     img.setAttribute('alt','video de la technique normalement')
@@ -57,6 +57,7 @@ function getJoueurInfo(){
                     imgClaire.setAttribute('src',img.getAttribute('src'))
                     console.log(img.src)
                 }
+                else if (getPageName()===Multi)
                 break
             }
 
