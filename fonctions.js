@@ -136,7 +136,7 @@ function afficheComparaison(nom1){
         }
         row.children[row.children.length-1].onanimationend = () => {
             console.log("Animation ended");
-            win(j1['Nom'],j2['Nom'])
+            win(j1['Nom'])
         };
         etatIndice()
         console.log(j1['Nom']+" vs "+j2['Nom'])
@@ -174,8 +174,8 @@ function compare(row,nom) {
     }
 }
 
-function win(nom1,nom2){
-    if(nom1===nom2 && joueurDuJour===nom2){
+function win(nom1){
+    if(nom1===joueurDuJour){
         console.log('fini')
         csv.then((s)=>{
             let perso;
