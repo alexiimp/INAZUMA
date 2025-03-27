@@ -33,8 +33,7 @@ function getJoueurInfo(){
     joueurDuJour = document.getElementById('joueurdujour').innerText
     console.log(joueurDuJour)
     csv.then((s)=>{
-        for (let joueur in s){
-            joueur=s[joueur]
+        for (let joueur of s){
             if (joueur['Nom']===joueurDuJour){
                 if(getPageName()==='Classique'){
                     document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = joueur['Episode'].replaceAll(';',',')
@@ -179,8 +178,7 @@ function win(nom1){
         console.log('fini')
         csv.then((s)=>{
             let perso;
-            for (let joueur in s){
-                joueur = s[joueur]
+            for (let joueur of s){
                 if (joueur['Nom']===nom1){
                     perso=joueur
                     break
@@ -353,8 +351,7 @@ function afficherPersos(){
     table.setAttribute('id','table_carte')
     csv.then((s)=>{
         let vide = true;
-        for (let joueur in s){
-            joueur = s[joueur]
+        for (let joueur of s){
             let verifsurnom = VerifSurnoms(joueur['Surnoms'],nom)
             if ((VerifNom(joueur['Nom'],nom) || verifsurnom[0]) && !dejaVu.includes(joueur["Nom"])){
                 let tr = document.createElement('tr');
