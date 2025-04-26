@@ -74,6 +74,7 @@ function getJoueurInfo(){
         }
     })
 }
+const cache = 'https://raw.githubusercontent.com/alexiimp/cache_inazumadle/refs/heads/main/images/';
 
 const dejaVu =[];
 const trouve=[];
@@ -158,7 +159,7 @@ function compare(row,nom) {
     let td = document.createElement('td');
     td.style.padding = '1%'
     let img = document.createElement('img');
-    img.setAttribute('src','images/personnages/'+nom.replaceAll(' ','-')+".jpg")
+    img.setAttribute('src',cache+"personnages"+nom.replaceAll(' ','-')+".jpg")
     img.setAttribute('class','photoDescription');
     img.setAttribute('alt','photo');
     let p = document.createElement('p');
@@ -200,7 +201,7 @@ function win(nom1){
                 }
             }
             let img = document.getElementById('photoVictoire')
-            img.setAttribute('src','images/personnages/'+perso['Photo'])
+            img.setAttribute('src',cache+"personnages"+perso['Photo'])
             document.getElementById('NbEssais').innerText = document.getElementById('NbEssais').innerText.replaceAll("X",dejaVu.length)
             document.getElementById('NomPerso').innerText = nom1
             document.getElementById('victoire').style.display = 'flex'
@@ -253,7 +254,7 @@ function compareClassique(cle,val1,val2,row){
         td.setAttribute('class','classique')
         if (cle==="Photo"){
             let img = document.createElement('img');
-            img.setAttribute('src','images/personnages/'+val1)
+            img.setAttribute('src',cache+"personnages"+val1)
             img.setAttribute('class','photo_comp');
             img.setAttribute('alt','photo');
             td.setAttribute('class','divPhoto')
@@ -381,7 +382,7 @@ function afficherPersos(){
                 carte.setAttribute('name',joueur['Nom']);
                 carte.setAttribute('onclick','afficheComparaison("'+joueur["Nom"]+'")');
                 let img = document.createElement('img');
-                img.setAttribute('src','images/personnages/'+joueur["Photo"]);
+                img.setAttribute('src',cache+"personnages"+joueur["Photo"]);
                 img.setAttribute('alt','photoperso');
                 img.setAttribute('class','photo_carte');
                 carte.appendChild(img);
