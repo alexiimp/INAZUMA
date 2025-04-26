@@ -56,8 +56,19 @@ function getJoueurInfo(){
                     imgClaire.setAttribute('src',img.getAttribute('src'))
                     console.log(img.src)
                 }
-                else if (getPageName()===Multi)
-                break
+                else if (getPageName()==='Multi'){
+                    let techniques = joueur['Multi'].split('-')
+                    let technique = techniques[Math.floor(Math.random()*techniques.length)]
+                    let img = document.getElementById('video')
+                    img.setAttribute('alt','video de la technique normalement')
+                    img.setAttribute('src','images/techniques/multi/'+technique)
+                    let imgClaire = document.getElementById('videoClaire')
+                    imgClaire.setAttribute('alt',img.getAttribute('alt'))
+                    imgClaire.setAttribute('src',img.getAttribute('src'))
+                    joueurDuJour = getJoueursTechnique(technique)
+                    console.log(joueurDuJour)
+                }
+
             }
 
         }
