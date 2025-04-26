@@ -76,6 +76,7 @@ function getJoueurInfo(){
 }
 
 const dejaVu =[];
+const trouve=[];
 
 function getPageName(){
     return document.getElementsByTagName('title')[0].innerText.replaceAll(" ","").split('-')[1]
@@ -118,7 +119,7 @@ function afficheComparaison(nom1){
             if (joueur1['Nom'].toLowerCase()===nom1.toLowerCase()){
                 j1=joueur1;
             }
-            if (joueur1['Nom']===joueurDuJour){
+            if (joueur1['Nom']===joueurDuJour || joueurDuJour.includes(joueur1['Nom'])){
                 j2=joueur1;
             }
             if (j1 && j2)
@@ -165,9 +166,12 @@ function compare(row,nom) {
     p.style.marginTop = '0'
     td.appendChild(img);
     td.appendChild(p)
-    if (nom===joueurDuJour){
+    if (nom===joueurDuJour || joueurDuJour.includes(nom)){
         td.style.backgroundColor='green'
         td.setAttribute('class','correct')
+        if (getPageName()==="Multi"){
+            trouve.push(nom)
+        }
     }
     else{
         td.style.backgroundColor='red'
@@ -185,7 +189,7 @@ function compare(row,nom) {
 }
 
 function win(nom1){
-    if(nom1===joueurDuJour){
+    if(nom1===joueurDuJour || tousTrouves()){
         console.log('fini')
         csv.then((s)=>{
             let perso;
@@ -468,4 +472,27 @@ function revele(id){
         id.removeAttribute('style');
     else
         id.style.transform='rotateY(180deg)';
+}
+
+function getJoueursTechnique(technique){
+    let joueurs = []
+    csv.then((s)=>{
+        for (let joueur of s){
+            let techniques = joueur['Multi'].split("-")
+            if (techniques.includes(technique)){
+                joueurs.push(joueur['Nom'])
+            }
+        }
+    })
+    return joueurs
+}
+
+function tousTrouves() {
+    if (getPageName()!=="Multi")
+        return false
+    for (let joueur of joueurDuJour){
+        if (!trouve.includes(joueur))
+            return false
+    }
+    return true
 }
