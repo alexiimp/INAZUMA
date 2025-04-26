@@ -513,6 +513,18 @@ fieldset{
     cursor: pointer;
 }
 
+#joueurs{
+    width : 30%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.photoMulti {
+    width: 20%;
+    border-radius: 100%;
+    border : 5px solid black;
+}
+
 
 /* width */
 ::-webkit-scrollbar {
