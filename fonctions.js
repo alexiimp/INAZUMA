@@ -50,7 +50,7 @@ function getJoueurInfo(){
                     let techniques = joueur['Supertechniques'].split('-')
                     let img = document.getElementById('video')
                     img.setAttribute('alt','video de la technique normalement')
-                    img.setAttribute('src',cache+'techniques/solo/'+techniques[Math.floor(Math.random()*techniques.length)])
+                    img.setAttribute('src',cache+'techniques/solo/'+techniques[Math.floor(Math.random()*techniques.length)].replaceAll(' ','%20'))
                     let imgClaire = document.getElementById('videoClaire')
                     imgClaire.setAttribute('alt',img.getAttribute('alt'))
                     imgClaire.setAttribute('src',img.getAttribute('src'))
@@ -61,7 +61,7 @@ function getJoueurInfo(){
                     let technique = techniques[Math.floor(Math.random()*techniques.length)]
                     let img = document.getElementById('video')
                     img.setAttribute('alt','video de la technique normalement')
-                    img.setAttribute('src',cache+'techniques/multi/'+technique)
+                    img.setAttribute('src',cache+'techniques/multi/'+technique.replaceAll(' ','%20'))
                     let imgClaire = document.getElementById('videoClaire')
                     imgClaire.setAttribute('alt',img.getAttribute('alt'))
                     imgClaire.setAttribute('src',img.getAttribute('src'))
