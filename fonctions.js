@@ -173,6 +173,8 @@ function compare(row,nom) {
         td.setAttribute('class','correct')
         if (getPageName()==="Multi"){
             trouve.push(nom)
+            let mecsGris = document.getElementById('joueurs').getElementsByClassName('photoMulti')
+            mecsGris[trouve.length-1].src = img.getAttribute('src')
         }
     }
     else{
