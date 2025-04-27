@@ -67,6 +67,7 @@ function getJoueurInfo(){
                     imgClaire.setAttribute('src',img.getAttribute('src'))
                     joueurDuJour = getJoueursTechnique(technique)
                     console.log(joueurDuJour)
+                    console.log(technique)
                 }
 
             }
@@ -482,6 +483,12 @@ function getJoueursTechnique(technique){
             let techniques = joueur['Multi'].split("-")
             if (techniques.includes(technique)){
                 joueurs.push(joueur['Nom'])
+                let divMecGris = document.getElementById('joueurs')
+                let mecGris = document.createElement('img')
+                mecGris.setAttribute('alt','unBougGris')
+                mecGris.setAttribute('class','photoMulti')
+                mecGris.setAttribute('src',cache+'personnages/inconnu.jpg')
+                divMecGris.appendChild(mecGris)
             }
         }
     })
