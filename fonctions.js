@@ -203,10 +203,22 @@ function win(nom1){
                     break
                 }
             }
-            let img = document.getElementById('photoVictoire')
-            img.setAttribute('src',cache+"personnages/"+perso['Photo'])
-            document.getElementById('NbEssais').innerText = document.getElementById('NbEssais').innerText.replaceAll("X",dejaVu.length)
-            document.getElementById('NomPerso').innerText = nom1
+            if (getPageName()==='Multi'){
+                document.getElementById('NbEssais').innerText = document.getElementById('NbEssais').innerText.replaceAll("X",dejaVu.length-joueurDuJour.length)
+                let joueurs = document.getElementById('winPersos');
+                for (let joueur of document.getElementById("joueurs").children){
+                    let img = document.createElement('img');
+                    img.setAttribute('src',joueur.src)
+                    img.setAttribute('class','photosVictoire');
+                    joueurs.appendChild(img)
+                }
+            }
+            else{
+                let img = document.getElementById('photoVictoire')
+                img.setAttribute('src',cache+"personnages/"+perso['Photo'])
+                document.getElementById('NbEssais').innerText = document.getElementById('NbEssais').innerText.replaceAll("X",dejaVu.length)
+                document.getElementById('NomPerso').innerText = nom1
+            }
             document.getElementById('victoire').style.display = 'flex'
             document.getElementById('formulaire').style.display = 'none'
             etatIndice()

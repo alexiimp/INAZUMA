@@ -441,8 +441,9 @@ fieldset{
     justify-content: space-between;
 }
 
-#photoVictoire{
+#photoVictoire ,.photosVictoire{
     width: 40%;
+    aspect-ratio: 1/1;
 }
 #divInfo{
     display: flex;
