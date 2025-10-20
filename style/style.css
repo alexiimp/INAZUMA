@@ -52,6 +52,7 @@ a{
 }
 .logo{
     width: 30%;
+    aspect-ratio: 1/1;
 }
 .logo:hover{
     cursor: pointer;
@@ -467,6 +468,9 @@ fieldset{
 .mode{
     background-color: khaki;
     border: 1px solid black;
+    width: 100%;
+    aspect-ratio: 8/1;
+    display: compact;
 }
 
 .prochainMode{
