@@ -52,7 +52,6 @@ a{
 }
 .logo{
     width: 30%;
-    aspect-ratio: 1/1;
 }
 .logo:hover{
     cursor: pointer;
