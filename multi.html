@@ -46,6 +46,14 @@
     <p id="donnees">Les données vont jusqu'à la saison 3 et comprennent Inazuma Eleven : le Film.</p>
 </div>
 
+<div id="multi-roster-panel" class="mainDiv multi-roster-panel">
+    <div class="multi-roster-header">
+        <h4>Équipe à retrouver</h4>
+        <span id="multi-progress" class="multi-progress">0 / 0</span>
+    </div>
+    <div id="joueurs" class="multi-roster" aria-live="polite"></div>
+</div>
+
 <script>
     function colorCanva(){
         let canva = document.getElementById('canva')
@@ -92,7 +100,6 @@
     }
 
 </script>
-<div id="joueurs"></div>
 <div style="overflow-x: auto;">
     <table id="comp"></table>
 </div>

@@ -172,9 +172,10 @@ function compare(row,nom) {
         td.style.backgroundColor='green'
         td.setAttribute('class','correct')
         if (getPageName()==="Multi"){
-            trouve.push(nom)
-            let mecsGris = document.getElementById('joueurs').getElementsByClassName('photoMulti')
-            mecsGris[trouve.length-1].src = img.getAttribute('src')
+            if (!trouve.includes(nom)) {
+                trouve.push(nom);
+                revealMultiJoueur(nom, img.getAttribute("src"));
+            }
         }
     }
     else{
@@ -206,12 +207,14 @@ function win(nom1){
             if (getPageName()==='Multi'){
                 document.getElementById('NbEssais').innerText = document.getElementById('NbEssais').innerText.replaceAll("X",dejaVu.length-joueurDuJour.length)
                 let joueurs = document.getElementById('winPersos');
-                for (let joueur of document.getElementById("joueurs").children){
+                joueurs.className = "multi-win-roster";
+                document.querySelectorAll("#joueurs .multi-slot").forEach(function (slot) {
                     let img = document.createElement('img');
-                    img.setAttribute('src',joueur.src)
-                    img.setAttribute('class','photosVictoire');
-                    joueurs.appendChild(img)
-                }
+                    img.setAttribute('src', slot.querySelector("img").src);
+                    img.setAttribute('class', 'photosVictoire');
+                    img.setAttribute('alt', slot.getAttribute("data-nom"));
+                    joueurs.appendChild(img);
+                });
             }
             else{
                 let img = document.getElementById('photoVictoire')
@@ -490,21 +493,69 @@ function revele(id){
         id.style.transform='rotateY(180deg)';
 }
 
+function updateMultiProgress(found, total) {
+    var progress = document.getElementById("multi-progress");
+    if (progress) {
+        progress.textContent = found + " / " + total;
+    }
+}
+
+function revealMultiJoueur(nom, photoSrc) {
+    var slot = document.querySelector('#joueurs .multi-slot[data-nom="' + nom + '"]');
+    if (!slot || slot.classList.contains("multi-slot--found")) {
+        return;
+    }
+
+    slot.classList.add("multi-slot--found");
+    slot.querySelector("img").setAttribute("src", photoSrc);
+    slot.querySelector(".multi-slot-name").textContent = nom;
+    slot.querySelector(".multi-slot-badge").textContent = "✓";
+
+    var total = document.querySelectorAll("#joueurs .multi-slot").length;
+    updateMultiProgress(trouve.length, total);
+}
+
 function getJoueursTechnique(technique){
     let joueurs = []
     csv.then((s)=>{
+        let roster = document.getElementById('joueurs');
+        roster.innerHTML = "";
+
         for (let joueur of s){
             let techniques = joueur['Multi'].split("-")
             if (techniques.includes(technique)){
-                joueurs.push(joueur['Nom'])
-                let divMecGris = document.getElementById('joueurs')
-                let mecGris = document.createElement('img')
-                mecGris.setAttribute('alt','unBougGris')
-                mecGris.setAttribute('class','photoMulti')
-                mecGris.setAttribute('src',cache+'personnages/inconnu.jpg')
-                divMecGris.appendChild(mecGris)
+                joueurs.push(joueur['Nom']);
+
+                let slot = document.createElement("div");
+                slot.className = "multi-slot";
+                slot.setAttribute("data-nom", joueur["Nom"]);
+
+                let avatar = document.createElement("div");
+                avatar.className = "multi-slot-avatar";
+
+                let img = document.createElement("img");
+                img.setAttribute("alt", "Personnage mystère");
+                img.setAttribute("class", "photoMulti");
+                img.setAttribute("src", cache + "personnages/inconnu.jpg");
+
+                let badge = document.createElement("span");
+                badge.className = "multi-slot-badge";
+                badge.textContent = "?";
+
+                avatar.appendChild(img);
+                avatar.appendChild(badge);
+
+                let name = document.createElement("p");
+                name.className = "multi-slot-name";
+                name.textContent = "???";
+
+                slot.appendChild(avatar);
+                slot.appendChild(name);
+                roster.appendChild(slot);
             }
         }
+
+        updateMultiProgress(0, joueurs.length);
     })
     return joueurs
 }
