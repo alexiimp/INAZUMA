@@ -2,7 +2,7 @@ async function getCsv(){
     let res= await fetch('joueurs.csv');
     let text=  await res.text();
     let doc = []
-    let lignes = text.split("\r\n");
+    let lignes = text.split(/\r?\n/).filter(ligne => ligne.length > 0);
     const headers = lignes[0].split(",");
     for (var i = 1 ; i<lignes.length ; i++) {
         var obj = {};
