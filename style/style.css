@@ -506,10 +506,14 @@ fieldset{
     height: 15px;
     justify-content: space-between;
     background-color: khaki;
+    gap: 6px;
+    padding: 0 8px;
+    box-sizing: border-box;
 }
 
 .logoMode{
-    width: 25%;
+    flex: 1;
+    min-width: 0;
 }
 
 .logoMode:hover{
