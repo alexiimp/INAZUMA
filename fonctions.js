@@ -1,3 +1,102 @@
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function getDayNumber() {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.floor(start.getTime() / 86400000);
+}
+
+function getEligiblePlayers(doc, pageName) {
+    if (pageName === 'Classique') {
+        return doc.map(joueur => joueur['Nom']);
+    }
+    return doc.filter(joueur => joueur[pageName]).map(joueur => joueur['Nom']);
+}
+
+function getJoueurDuJourStorageKey(pageName) {
+    return 'inazumadle_joueurDuJour_' + pageName;
+}
+
+function pickRandom(items) {
+    return items[Math.floor(Math.random() * items.length)];
+}
+
+function pickExtraForPlayer(joueur, pageName) {
+    if (pageName === 'Classique' || pageName === 'Description') {
+        return pickRandom(joueur['Description'].split('-'));
+    }
+    if (pageName === 'Supertechniques') {
+        return pickRandom(joueur['Supertechniques'].split('-'));
+    }
+    if (pageName === 'Multi') {
+        return pickRandom(joueur['Multi'].split('-'));
+    }
+    return null;
+}
+
+function buildWeeklySchedule(doc, pageName, weekId) {
+    const eligibleNoms = getEligiblePlayers(doc, pageName);
+    const shuffledNoms = shuffleArray([...eligibleNoms]).slice(0, Math.min(7, eligibleNoms.length));
+    const days = shuffledNoms.map(nom => {
+        const joueur = doc.find(j => j['Nom'] === nom);
+        return { nom, extra: pickExtraForPlayer(joueur, pageName) };
+    });
+    return { weekId, days };
+}
+
+function isValidSchedule(schedule, weekId) {
+    return schedule
+        && schedule.weekId === weekId
+        && Array.isArray(schedule.days)
+        && schedule.days.length > 0
+        && schedule.days.every(day => day.nom && day.extra);
+}
+
+function getOrCreateWeeklySchedule(doc, pageName) {
+    const weekId = Math.floor(getDayNumber() / 7);
+    const storageKey = getJoueurDuJourStorageKey(pageName);
+    const eligible = getEligiblePlayers(doc, pageName);
+
+    if (eligible.length === 0) {
+        return null;
+    }
+
+    let schedule = null;
+    try {
+        schedule = JSON.parse(localStorage.getItem(storageKey));
+    } catch (e) {
+        schedule = null;
+    }
+
+    if (!isValidSchedule(schedule, weekId)) {
+        schedule = buildWeeklySchedule(doc, pageName, weekId);
+        localStorage.setItem(storageKey, JSON.stringify(schedule));
+    }
+
+    const dayIndex = getDayNumber() % 7;
+    return schedule.days[dayIndex % schedule.days.length];
+}
+
+function selectJoueurDuJour(doc) {
+    const pageName = getPageName();
+    const entry = getOrCreateWeeklySchedule(doc, pageName);
+    if (entry) {
+        const el = document.getElementById('joueurdujour');
+        el.innerText = entry.nom;
+        if (entry.extra) {
+            el.dataset.extra = entry.extra;
+        } else {
+            delete el.dataset.extra;
+        }
+    }
+}
+
 async function getCsv(){
     let res= await fetch('joueurs.csv');
     let text=  await res.text();
@@ -12,62 +111,48 @@ async function getCsv(){
         }
         doc.push(obj);
     }
-    if (getPageName()==='Classique'){
-        let nb = Math.floor(Math.random()*doc.length)
-        document.getElementById('joueurdujour').innerText = doc[nb]['Nom']
-    }
-    else{
-        do{
-            var nb = Math.floor(Math.random()*doc.length)
-            document.getElementById('joueurdujour').innerText = doc[nb]['Nom']
-            console.log(doc[nb][getPageName()])
-        }
-        while(!doc[nb][getPageName()])
-    }
+    selectJoueurDuJour(doc);
     getJoueurInfo()
     return doc
 }
 const csv = getCsv();
 var joueurDuJour;
 function getJoueurInfo(){
-    joueurDuJour = document.getElementById('joueurdujour').innerText
+    const joueurDuJourEl = document.getElementById('joueurdujour');
+    joueurDuJour = joueurDuJourEl.innerText;
+    const extra = joueurDuJourEl.dataset.extra;
     console.log(joueurDuJour)
     csv.then((s)=>{
         for (let joueur of s){
             if (joueur['Nom']===joueurDuJour){
                 if(getPageName()==='Classique'){
                     document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = joueur['Episode'].replaceAll(';',',')
-                    let descriptions = joueur['Description'].split('-')
-                    document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')
+                    document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = extra.replace(';',',')
                 }
                 else if (getPageName()==='Description'){
-                    let descriptions = joueur['Description'].split('-')
-                    document.getElementById('description').innerText = '"'+descriptions[Math.floor(Math.random()*descriptions.length)].replaceAll(';',',')+'"'
+                    document.getElementById('description').innerText = '"'+extra.replaceAll(';',',')+'"'
                     document.getElementById('indicePoste').getElementsByTagName('p')[1].innerText = joueur['Poste']
                     document.getElementById('indiceEquipe').getElementsByTagName('p')[1].innerText = joueur['Equipe']
                 }
                 else if(getPageName()==='Supertechniques'){
-                    let techniques = joueur['Supertechniques'].split('-')
                     let img = document.getElementById('video')
                     img.setAttribute('alt','video de la technique normalement')
-                    img.setAttribute('src',cache+'techniques/solo/'+techniques[Math.floor(Math.random()*techniques.length)].replaceAll(' ','%20'))
+                    img.setAttribute('src',cache+'techniques/solo/'+extra.replaceAll(' ','%20'))
                     let imgClaire = document.getElementById('videoClaire')
                     imgClaire.setAttribute('alt',img.getAttribute('alt'))
                     imgClaire.setAttribute('src',img.getAttribute('src'))
                     console.log(img.src)
                 }
                 else if (getPageName()==='Multi'){
-                    let techniques = joueur['Multi'].split('-')
-                    let technique = techniques[Math.floor(Math.random()*techniques.length)]
                     let img = document.getElementById('video')
                     img.setAttribute('alt','video de la technique normalement')
-                    img.setAttribute('src',cache+'techniques/multi/'+technique.replaceAll(' ','%20'))
+                    img.setAttribute('src',cache+'techniques/multi/'+extra.replaceAll(' ','%20'))
                     let imgClaire = document.getElementById('videoClaire')
                     imgClaire.setAttribute('alt',img.getAttribute('alt'))
                     imgClaire.setAttribute('src',img.getAttribute('src'))
-                    joueurDuJour = getJoueursTechnique(technique)
+                    getJoueursTechnique(extra)
                     console.log(joueurDuJour)
-                    console.log(technique)
+                    console.log(extra)
                 }
 
             }
@@ -556,6 +641,7 @@ function getJoueursTechnique(technique){
         }
 
         updateMultiProgress(0, joueurs.length);
+        joueurDuJour = joueurs;
     })
     return joueurs
 }
