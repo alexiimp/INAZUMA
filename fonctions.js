@@ -1,3 +1,5 @@
+// ===== Choix déterministe du joueur du jour =====
+
 function createSeededRandom(seed) {
     let value = seed >>> 0;
     return function () {
@@ -118,6 +120,8 @@ function selectJoueurDuJour(doc) {
     }
 }
 
+// ===== Chargement du CSV et préparation des informations =====
+
 async function getCsv(){
     let res= await fetch('joueurs.csv');
     let text=  await res.text();
@@ -188,6 +192,8 @@ const cache = 'https://raw.githubusercontent.com/alexiimp/cache_inazumadle/refs/
 
 const dejaVu =[];
 const trouve=[];
+
+// ===== Sauvegarde et restauration de la progression =====
 
 function getProgressStorageKey(pageName) {
     return 'inazumadle_progress_' + pageName + '_' + getDayNumber();
@@ -304,6 +310,9 @@ function initGameState() {
 function getPageName(){
     return document.getElementsByTagName('title')[0].innerText.replaceAll(" ","").split('-')[1]
 }
+
+// ===== Vérification et recherche des noms =====
+
 function VerifNom(nom,char){
     let noms = nom.split(' ');
     let chars = char.split(' ');
@@ -332,6 +341,8 @@ function VerifSurnoms(surnoms,char){
     }
     return [false];
 }
+
+// ===== Comparaison des réponses avec le joueur du jour =====
 
 function afficheComparaison(nom1, isRestore = false){
     csv.then((s)=>{
@@ -468,6 +479,8 @@ function win(nom1, isRestore = false){
     }
 }
 
+// ===== Affichage de l'historique du mode classique =====
+
 function buildClassiqueHistorique(){
     let table = document.getElementById("comp")
     let rows = table.getElementsByTagName('tr')
@@ -504,6 +517,9 @@ function buildClassiqueHistorique(){
         }
     }
 }
+
+// ===== Comparaison détaillée du mode classique =====
+
 function compareClassique(cle,val1,val2,row,isRestore = false){
     let cles = ["Photo","Genre","Equipe","Poste","Element","Origine","Classe","Apparition"]
     if (cles.includes(cle)){
@@ -605,7 +621,11 @@ function compareClassique(cle,val1,val2,row,isRestore = false){
 
 
 }
+
 var precedent;
+
+// ===== Recherche des personnages =====
+
 function afficherPersos(){
     var ancien = document.getElementById('liste_carte');
     let nom = document.getElementById('guess').value;
@@ -730,6 +750,9 @@ function etatIndice(){
 
     }
 }
+
+// ===== Indices et éléments spécifiques au mode Multi =====
+
 function revele(id){
     if (id.style.transform==='rotateY(180deg)')
         id.removeAttribute('style');
