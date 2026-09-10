@@ -1,3 +1,123 @@
+function createSeededRandom(seed) {
+    let value = seed >>> 0;
+    return function () {
+        value += 0x6D2B79F5;
+        let result = value;
+        result = Math.imul(result ^ result >>> 15, result | 1);
+        result ^= result + Math.imul(result ^ result >>> 7, result | 61);
+        return ((result ^ result >>> 14) >>> 0) / 4294967296;
+    };
+}
+
+function hashSeed(value) {
+    let hash = 2166136261;
+    for (let i = 0; i < value.length; i++) {
+        hash ^= value.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+    }
+    return hash >>> 0;
+}
+
+function seededShuffle(array, random) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function getDayNumber() {
+    const now = new Date();
+    const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return Math.floor(start.getTime() / 86400000);
+}
+
+function getEligiblePlayers(doc, pageName) {
+    if (pageName === 'Classique') {
+        return doc.map(joueur => joueur['Nom']);
+    }
+    return doc.filter(joueur => joueur[pageName]).map(joueur => joueur['Nom']);
+}
+
+function getJoueurDuJourStorageKey(pageName) {
+    return 'inazumadle_joueurDuJour_' + pageName;
+}
+
+function pickExtraForPlayer(joueur, pageName, random) {
+    if (pageName === 'Classique' || pageName === 'Description') {
+        const descriptions = joueur['Description'].split('-');
+        return descriptions[Math.floor(random() * descriptions.length)];
+    }
+    if (pageName === 'Supertechniques') {
+        const techniques = joueur['Supertechniques'].split('-');
+        return techniques[Math.floor(random() * techniques.length)];
+    }
+    if (pageName === 'Multi') {
+        const techniques = joueur['Multi'].split('-');
+        return techniques[Math.floor(random() * techniques.length)];
+    }
+    return null;
+}
+
+function buildWeeklySchedule(doc, pageName, weekId) {
+    const random = createSeededRandom(hashSeed(pageName + ':' + weekId));
+    const eligibleNoms = getEligiblePlayers(doc, pageName);
+    const shuffledNoms = seededShuffle([...eligibleNoms], random).slice(0, Math.min(7, eligibleNoms.length));
+    const days = shuffledNoms.map(nom => {
+        const joueur = doc.find(j => j['Nom'] === nom);
+        return { nom, extra: pickExtraForPlayer(joueur, pageName, random) };
+    });
+    return { version: 2, weekId, days };
+}
+
+function isValidSchedule(schedule, weekId) {
+    return schedule
+        && schedule.version === 2
+        && schedule.weekId === weekId
+        && Array.isArray(schedule.days)
+        && schedule.days.length > 0
+        && schedule.days.every(day => day.nom && day.extra);
+}
+
+function getOrCreateWeeklySchedule(doc, pageName) {
+    const weekId = Math.floor(getDayNumber() / 7);
+    const storageKey = getJoueurDuJourStorageKey(pageName);
+    const eligible = getEligiblePlayers(doc, pageName);
+
+    if (eligible.length === 0) {
+        return null;
+    }
+
+    let schedule = null;
+    try {
+        schedule = JSON.parse(localStorage.getItem(storageKey));
+    } catch (e) {
+        schedule = null;
+    }
+
+    if (!isValidSchedule(schedule, weekId)) {
+        schedule = buildWeeklySchedule(doc, pageName, weekId);
+        localStorage.setItem(storageKey, JSON.stringify(schedule));
+    }
+
+    const dayIndex = getDayNumber() % 7;
+    return schedule.days[dayIndex % schedule.days.length];
+}
+
+function selectJoueurDuJour(doc) {
+    const pageName = getPageName();
+    const entry = getOrCreateWeeklySchedule(doc, pageName);
+    if (entry) {
+        const el = document.getElementById('joueurdujour');
+        el.innerText = entry.nom;
+        if (entry.extra) {
+            el.dataset.extra = entry.extra;
+        } else {
+            delete el.dataset.extra;
+        }
+    }
+}
+
 async function getCsv(){
     let res= await fetch('joueurs.csv');
     let text=  await res.text();
@@ -12,62 +132,51 @@ async function getCsv(){
         }
         doc.push(obj);
     }
-    if (getPageName()==='Classique'){
-        let nb = Math.floor(Math.random()*doc.length)
-        document.getElementById('joueurdujour').innerText = doc[nb]['Nom']
-    }
-    else{
-        do{
-            var nb = Math.floor(Math.random()*doc.length)
-            document.getElementById('joueurdujour').innerText = doc[nb]['Nom']
-            console.log(doc[nb][getPageName()])
-        }
-        while(!doc[nb][getPageName()])
-    }
+    selectJoueurDuJour(doc);
     getJoueurInfo()
     return doc
 }
 const csv = getCsv();
 var joueurDuJour;
 function getJoueurInfo(){
-    joueurDuJour = document.getElementById('joueurdujour').innerText
+    const joueurDuJourEl = document.getElementById('joueurdujour');
+    joueurDuJour = joueurDuJourEl.innerText;
+    const extra = joueurDuJourEl.dataset.extra;
     console.log(joueurDuJour)
     csv.then((s)=>{
         for (let joueur of s){
             if (joueur['Nom']===joueurDuJour){
                 if(getPageName()==='Classique'){
                     document.getElementById('indiceApparition').getElementsByTagName('p')[1].innerText = joueur['Episode'].replaceAll(';',',')
-                    let descriptions = joueur['Description'].split('-')
-                    document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = descriptions[Math.floor(Math.random()*descriptions.length)].replace(';',',')
+                    document.getElementById('indiceDescription').getElementsByTagName('p')[1].innerText = extra.replace(';',',')
+                    initGameState();
                 }
                 else if (getPageName()==='Description'){
-                    let descriptions = joueur['Description'].split('-')
-                    document.getElementById('description').innerText = '"'+descriptions[Math.floor(Math.random()*descriptions.length)].replaceAll(';',',')+'"'
+                    document.getElementById('description').innerText = '"'+extra.replaceAll(';',',')+'"'
                     document.getElementById('indicePoste').getElementsByTagName('p')[1].innerText = joueur['Poste']
                     document.getElementById('indiceEquipe').getElementsByTagName('p')[1].innerText = joueur['Equipe']
+                    initGameState();
                 }
                 else if(getPageName()==='Supertechniques'){
-                    let techniques = joueur['Supertechniques'].split('-')
                     let img = document.getElementById('video')
                     img.setAttribute('alt','video de la technique normalement')
-                    img.setAttribute('src',cache+'techniques/solo/'+techniques[Math.floor(Math.random()*techniques.length)].replaceAll(' ','%20'))
+                    img.setAttribute('src',cache+'techniques/solo/'+extra.replaceAll(' ','%20'))
                     let imgClaire = document.getElementById('videoClaire')
                     imgClaire.setAttribute('alt',img.getAttribute('alt'))
                     imgClaire.setAttribute('src',img.getAttribute('src'))
                     console.log(img.src)
+                    initGameState();
                 }
                 else if (getPageName()==='Multi'){
-                    let techniques = joueur['Multi'].split('-')
-                    let technique = techniques[Math.floor(Math.random()*techniques.length)]
                     let img = document.getElementById('video')
                     img.setAttribute('alt','video de la technique normalement')
-                    img.setAttribute('src',cache+'techniques/multi/'+technique.replaceAll(' ','%20'))
+                    img.setAttribute('src',cache+'techniques/multi/'+extra.replaceAll(' ','%20'))
                     let imgClaire = document.getElementById('videoClaire')
                     imgClaire.setAttribute('alt',img.getAttribute('alt'))
                     imgClaire.setAttribute('src',img.getAttribute('src'))
-                    joueurDuJour = getJoueursTechnique(technique)
+                    getJoueursTechnique(extra, initGameState)
                     console.log(joueurDuJour)
-                    console.log(technique)
+                    console.log(extra)
                 }
 
             }
@@ -79,6 +188,118 @@ const cache = 'https://raw.githubusercontent.com/alexiimp/cache_inazumadle/refs/
 
 const dejaVu =[];
 const trouve=[];
+
+function getProgressStorageKey(pageName) {
+    return 'inazumadle_progress_' + pageName + '_' + getDayNumber();
+}
+
+function resetInazumadleSave(reload = true) {
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+        const key = localStorage.key(i);
+        if (key.startsWith('inazumadle_joueurDuJour_') || key.startsWith('inazumadle_progress_')) {
+            localStorage.removeItem(key);
+        }
+    }
+    if (reload) {
+        location.reload();
+    }
+}
+
+function getDefaultProgress(joueurNom) {
+    return { joueurNom, dejaVu: [], trouve: [], won: false, indicesReveles: [], blur: 0 };
+}
+
+function loadProgress(joueurNom) {
+    try {
+        const saved = JSON.parse(localStorage.getItem(getProgressStorageKey(getPageName())));
+        if (saved && saved.joueurNom === joueurNom) {
+            return saved;
+        }
+    } catch (e) {}
+    return getDefaultProgress(joueurNom);
+}
+
+function getRevealedIndices() {
+    const indices = document.getElementById('indices');
+    if (!indices) {
+        return [];
+    }
+    return [...indices.children]
+        .filter(indice => indice.style.transform === 'rotateY(180deg)')
+        .map(indice => indice.id);
+}
+
+function saveProgress() {
+    const victoire = document.getElementById('victoire');
+    const progress = {
+        joueurNom: document.getElementById('joueurdujour').innerText,
+        dejaVu: [...dejaVu],
+        trouve: [...trouve],
+        won: victoire && victoire.style.display === 'flex',
+        indicesReveles: getRevealedIndices(),
+        blur: typeof blur !== 'undefined' ? blur : 0,
+    };
+    localStorage.setItem(getProgressStorageKey(getPageName()), JSON.stringify(progress));
+}
+
+function restoreIndices(ids) {
+    if (!ids || !ids.length) {
+        return;
+    }
+    for (const id of ids) {
+        const indice = document.getElementById(id);
+        if (indice) {
+            indice.classList.add('disponible');
+            indice.style.transform = 'rotateY(180deg)';
+        }
+    }
+}
+
+function initGameState() {
+    const joueurNom = document.getElementById('joueurdujour').innerText;
+    const progress = loadProgress(joueurNom);
+
+    dejaVu.push(...progress.dejaVu);
+    trouve.push(...progress.trouve);
+
+    if (progress.blur && typeof blur !== 'undefined') {
+        blur = progress.blur;
+        const blurred = document.getElementById('blurred');
+        if (blurred && blurred.checked) {
+            deblur();
+        }
+    }
+
+    if (progress.dejaVu.length > 0) {
+        const instructions = document.getElementById('instructions');
+        if (instructions) {
+            instructions.style.display = 'none';
+        }
+    }
+
+    if (!progress.dejaVu.length && !progress.won) {
+        return;
+    }
+
+    csv.then(() => {
+        for (const nom of progress.dejaVu) {
+            afficheComparaison(nom, true);
+        }
+        if (getPageName() === 'Multi') {
+            for (const nom of trouve) {
+                revealMultiJoueur(nom, cache + "personnages/" + nom.replaceAll(' ', '-') + ".jpg");
+            }
+        }
+        etatIndice();
+        restoreIndices(progress.indicesReveles);
+        if (progress.won) {
+            const winNom = getPageName() === 'Multi'
+                ? progress.dejaVu[progress.dejaVu.length - 1]
+                : joueurDuJour;
+            win(winNom, true);
+        }
+    });
+}
 
 function getPageName(){
     return document.getElementsByTagName('title')[0].innerText.replaceAll(" ","").split('-')[1]
@@ -112,7 +333,7 @@ function VerifSurnoms(surnoms,char){
     return [false];
 }
 
-function afficheComparaison(nom1){
+function afficheComparaison(nom1, isRestore = false){
     csv.then((s)=>{
         let j1;
         let j2;
@@ -130,33 +351,38 @@ function afficheComparaison(nom1){
         if (!j1){/*Si le nom ne correspond a aucun perso*/
             return
         }
-        /*On reboot la liste de perso et le zone de texte*/
-        let text = document.getElementById('guess')
-        text.value = ""
-        afficherPersos()
-        dejaVu.push(j1['Nom']);
+        if (!isRestore) {
+            /*On reboot la liste de perso et le zone de texte*/
+            let text = document.getElementById('guess')
+            text.value = ""
+            afficherPersos()
+            dejaVu.push(j1['Nom']);
+        }
         let row;
         let table = document.getElementById('comp');
         if (getPageName()==='Classique'){
             row = table.insertRow(1)
             for (let cle in j1){
-                compareClassique(cle,j1[cle],j2[cle],row);
+                compareClassique(cle,j1[cle],j2[cle],row,isRestore);
             }
         }
         else{
             row = table.insertRow(0)
-            compare(row,j1['Nom']);
+            compare(row,j1['Nom'],isRestore);
         }
-        row.children[row.children.length-1].onanimationend = () => {
-            console.log("Animation ended");
-            win(j1['Nom'])
-        };
-        etatIndice()
+        if (!isRestore) {
+            row.children[row.children.length-1].onanimationend = () => {
+                console.log("Animation ended");
+                win(j1['Nom'])
+            };
+            etatIndice()
+            saveProgress()
+        }
         console.log(j1['Nom']+" vs "+j2['Nom'])
     })
 }
 
-function compare(row,nom) {
+function compare(row,nom,isRestore = false) {
     let td = document.createElement('td');
     td.style.padding = '1%'
     let img = document.createElement('img');
@@ -184,7 +410,7 @@ function compare(row,nom) {
     }
     row.appendChild(td);
 
-    if(document.getElementById('blurred')&&document.getElementById('blurred').checked){
+    if(!isRestore && document.getElementById('blurred')&&document.getElementById('blurred').checked){
         if ((18-blur)>12)
             blur+=2
         else if ((18-blur)>6)
@@ -193,7 +419,7 @@ function compare(row,nom) {
     }
 }
 
-function win(nom1){
+function win(nom1, isRestore = false){
     if(nom1===joueurDuJour || tousTrouves()){
         console.log('fini')
         csv.then((s)=>{
@@ -208,6 +434,7 @@ function win(nom1){
                 document.getElementById('NbEssais').innerText = document.getElementById('NbEssais').innerText.replaceAll("X",dejaVu.length-joueurDuJour.length)
                 let joueurs = document.getElementById('winPersos');
                 joueurs.className = "multi-win-roster";
+                joueurs.innerHTML = "";
                 document.querySelectorAll("#joueurs .multi-slot").forEach(function (slot) {
                     let img = document.createElement('img');
                     img.setAttribute('src', slot.querySelector("img").src);
@@ -225,50 +452,67 @@ function win(nom1){
             document.getElementById('victoire').style.display = 'flex'
             document.getElementById('formulaire').style.display = 'none'
             etatIndice()
-            document.getElementById('victoire').scrollIntoView({block:"center",inline:"nearest",behavior:"smooth"})
+            const scrollToVictoire = () => {
+                document.getElementById('victoire').scrollIntoView({block:"center",inline:"nearest",behavior:"smooth"})
+            }
+            if (isRestore) {
+                setTimeout(scrollToVictoire, 900)
+            } else {
+                requestAnimationFrame(scrollToVictoire)
+            }
+            if (getPageName()==="Classique"){
+                buildClassiqueHistorique()
+            }
+            saveProgress()
         })
-        if (getPageName()==="Classique"){
-            let table = document.getElementById("comp")
-            let rows = table.getElementsByTagName('tr')
-            let historique = document.getElementById('historique')
-            let compt=0
-            for (let row of rows){
-                let tds = row.getElementsByTagName("td")
-                let emojis = ""
-                for (let td of tds){
-                    if (td.classList.contains('classique')){
-                        if (td.style.backgroundColor==="orange")
-                            emojis+="🟨"
-                        else if (td.style.backgroundColor==="green")
-                            emojis+="🟩"
-                        else if (td.style.backgroundColor==="red"){
-                            if (td.getElementsByClassName('sup').length!==0)
-                                emojis+="⬆️"
-                            else if(td.getElementsByClassName('inf').length!==0)
-                                emojis+="⬇️"
-                            else
-                                emojis+="🟥"
-                        }
-                    }
-                }
-                historique.innerHTML+=emojis+"<br>"
-                if (compt<=5)
-                    compt++
-                else{
-                    historique.innerHTML+="+"+(rows.length-1-compt)+" de plus"
-                    break
+    }
+}
+
+function buildClassiqueHistorique(){
+    let table = document.getElementById("comp")
+    let rows = table.getElementsByTagName('tr')
+    let historique = document.getElementById('historique')
+    historique.innerHTML = ""
+    let compt=0
+    for (let row of rows){
+        let tds = row.getElementsByTagName("td")
+        let emojis = ""
+        for (let td of tds){
+            if (td.classList.contains('classique')){
+                if (td.style.backgroundColor==="orange")
+                    emojis+="🟨"
+                else if (td.style.backgroundColor==="green")
+                    emojis+="🟩"
+                else if (td.style.backgroundColor==="red"){
+                    if (td.getElementsByClassName('sup').length!==0)
+                        emojis+="⬆️"
+                    else if(td.getElementsByClassName('inf').length!==0)
+                        emojis+="⬇️"
+                    else
+                        emojis+="🟥"
                 }
             }
         }
+        if (emojis) {
+            historique.innerHTML+=emojis+"<br>"
+        }
+        if (compt<=5)
+            compt++
+        else{
+            historique.innerHTML+="+"+(rows.length-1-compt)+" de plus"
+            break
+        }
     }
 }
-function compareClassique(cle,val1,val2,row){
+function compareClassique(cle,val1,val2,row,isRestore = false){
     let cles = ["Photo","Genre","Equipe","Poste","Element","Origine","Classe","Apparition"]
     if (cles.includes(cle)){
-        if (dejaVu.length===1)//On retire les instructions si un premier joueur a été cherché
+        if (!isRestore && dejaVu.length===1)//On retire les instructions si un premier joueur a été cherché
             document.getElementById('instructions').style.display = 'none'
         let td = document.createElement('td');
-        td.style.animationDelay = (cles.indexOf(cle)*0.6-0.6)+"s"
+        if (!isRestore) {
+            td.style.animationDelay = (cles.indexOf(cle)*0.6-0.6)+"s"
+        }
         td.setAttribute('class','classique')
         if (cle==="Photo"){
             let img = document.createElement('img');
@@ -491,6 +735,7 @@ function revele(id){
         id.removeAttribute('style');
     else
         id.style.transform='rotateY(180deg)';
+    saveProgress();
 }
 
 function updateMultiProgress(found, total) {
@@ -515,7 +760,7 @@ function revealMultiJoueur(nom, photoSrc) {
     updateMultiProgress(trouve.length, total);
 }
 
-function getJoueursTechnique(technique){
+function getJoueursTechnique(technique, onReady){
     let joueurs = []
     csv.then((s)=>{
         let roster = document.getElementById('joueurs');
@@ -555,7 +800,11 @@ function getJoueursTechnique(technique){
             }
         }
 
-        updateMultiProgress(0, joueurs.length);
+        joueurDuJour = joueurs;
+        updateMultiProgress(trouve.length, joueurs.length);
+        if (onReady) {
+            onReady();
+        }
     })
     return joueurs
 }
