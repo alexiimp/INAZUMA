@@ -1,6 +1,26 @@
-function shuffleArray(array) {
+function createSeededRandom(seed) {
+    let value = seed >>> 0;
+    return function () {
+        value += 0x6D2B79F5;
+        let result = value;
+        result = Math.imul(result ^ result >>> 15, result | 1);
+        result ^= result + Math.imul(result ^ result >>> 7, result | 61);
+        return ((result ^ result >>> 14) >>> 0) / 4294967296;
+    };
+}
+
+function hashSeed(value) {
+    let hash = 2166136261;
+    for (let i = 0; i < value.length; i++) {
+        hash ^= value.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+    }
+    return hash >>> 0;
+}
+
+function seededShuffle(array, random) {
     for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+        const j = Math.floor(random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
     }
     return array;
@@ -23,35 +43,36 @@ function getJoueurDuJourStorageKey(pageName) {
     return 'inazumadle_joueurDuJour_' + pageName;
 }
 
-function pickRandom(items) {
-    return items[Math.floor(Math.random() * items.length)];
-}
-
-function pickExtraForPlayer(joueur, pageName) {
+function pickExtraForPlayer(joueur, pageName, random) {
     if (pageName === 'Classique' || pageName === 'Description') {
-        return pickRandom(joueur['Description'].split('-'));
+        const descriptions = joueur['Description'].split('-');
+        return descriptions[Math.floor(random() * descriptions.length)];
     }
     if (pageName === 'Supertechniques') {
-        return pickRandom(joueur['Supertechniques'].split('-'));
+        const techniques = joueur['Supertechniques'].split('-');
+        return techniques[Math.floor(random() * techniques.length)];
     }
     if (pageName === 'Multi') {
-        return pickRandom(joueur['Multi'].split('-'));
+        const techniques = joueur['Multi'].split('-');
+        return techniques[Math.floor(random() * techniques.length)];
     }
     return null;
 }
 
 function buildWeeklySchedule(doc, pageName, weekId) {
+    const random = createSeededRandom(hashSeed(pageName + ':' + weekId));
     const eligibleNoms = getEligiblePlayers(doc, pageName);
-    const shuffledNoms = shuffleArray([...eligibleNoms]).slice(0, Math.min(7, eligibleNoms.length));
+    const shuffledNoms = seededShuffle([...eligibleNoms], random).slice(0, Math.min(7, eligibleNoms.length));
     const days = shuffledNoms.map(nom => {
         const joueur = doc.find(j => j['Nom'] === nom);
-        return { nom, extra: pickExtraForPlayer(joueur, pageName) };
+        return { nom, extra: pickExtraForPlayer(joueur, pageName, random) };
     });
-    return { weekId, days };
+    return { version: 2, weekId, days };
 }
 
 function isValidSchedule(schedule, weekId) {
     return schedule
+        && schedule.version === 2
         && schedule.weekId === weekId
         && Array.isArray(schedule.days)
         && schedule.days.length > 0
