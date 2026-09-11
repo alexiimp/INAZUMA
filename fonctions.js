@@ -475,6 +475,7 @@ function win(nom1, isRestore = false){
                 buildClassiqueHistorique()
             }
             saveProgress()
+            dejaVaincu()
         })
     }
 }
@@ -841,3 +842,40 @@ function tousTrouves() {
     }
     return true
 }
+
+function dejaVaincu(){
+    var pagesVaincues = [];
+    var prefix = 'inazumadle_progress_';
+    var jourActuel = getDayNumber();
+
+    for (let i = 0; i < localStorage.length; i++) {
+        let key = localStorage.key(i);
+        if (!key || !key.startsWith(prefix) || !key.endsWith('_' + jourActuel)) {
+            continue;
+        }
+
+        try {
+            var progress = JSON.parse(localStorage.getItem(key));
+            if (progress && progress.won) {
+                let page = key.slice(prefix.length, -(String(jourActuel).length + 1));
+                const mode = document.getElementById('mode' + page);
+                const modeVictoire = document.getElementById('mode' + page + 'Victoire');
+                if (mode) {
+                    mode.classList.add('mode-termine');
+                    mode.querySelector('.page-check').classList.add('page-check-visible');
+                }
+                if (modeVictoire) {
+                    modeVictoire.classList.add('mode-termine');
+                    modeVictoire.querySelector('.page-check').classList.add('page-check-visible');
+                }
+                pagesVaincues.push(page);
+            }
+        } catch (e) {
+            // Une sauvegarde invalide ne doit pas empêcher les autres d'être lues.
+        }
+    }
+
+    return pagesVaincues;
+}
+
+document.addEventListener('DOMContentLoaded', dejaVaincu);

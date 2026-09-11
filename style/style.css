@@ -511,10 +511,19 @@ fieldset{
     box-sizing: border-box;
 }
 
+#victoire .listeMode{
+    margin-bottom: 10%;
+}
+
 .logoMode{
     flex: 1;
     min-width: 0;
     filter: grayscale(100%);
+    position: relative;
+}
+
+.logoMode.mode-termine{
+    filter: none;
 }
 
 .logoMode:hover{
@@ -522,10 +531,43 @@ fieldset{
     cursor: pointer;
 }
 
-.pageActuelle{
-    filter: none;
+.logoMode.pageActuelle{
+    filter: drop-shadow(0 0 10px #faf9f3) drop-shadow(0 0 10px #faf9f3) ;
 }
 
+.page-check{
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    z-index: 1;
+    color: green;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: white;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 22px;
+    text-align: center;
+    pointer-events: none;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.logoMode .page-check{
+    font-size: 22px;
+}
+
+.page-check.page-check-visible{
+    visibility: visible;
+    opacity: 1;
+}
 #joueurs,
 .multi-roster {
     width: 100%;
