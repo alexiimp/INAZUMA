@@ -514,11 +514,16 @@ fieldset{
 .logoMode{
     flex: 1;
     min-width: 0;
+    filter: grayscale(100%);
 }
 
 .logoMode:hover{
     transform: scale(105%);
     cursor: pointer;
+}
+
+.pageActuelle{
+    filter: none;
 }
 
 #joueurs,
